@@ -20,23 +20,26 @@ const AppBar = () => {
   return (
     <header className="sticky top-0 z-40 w-full border-b bg-background">
       <div className="container flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
-        <Link href={"/"} className="text-primary">
-          KnownVex
-        </Link>
-        <div className="flex items-center gap-10 ">
+        <div className="flex items-center gap-10">
+          <Link href={"/"} className="text-primary">
+            KnownVex
+          </Link>
+
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <div className="flex items-center cursor-pointer">
-                <span className="text-primary">courses</span>
-                <ChevronDown className="ml-1 h-4 w-4" />
+              <div className="group flex items-center cursor-pointer ">
+                <span className="group-hover:text-primary text-muted-foreground">
+                  courses
+                </span>
+                <ChevronDown className="ml-1 h-4 w-4 text-muted-foreground group-hover:text-primary" />
               </div>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-56">
+            <DropdownMenuContent className="w-56 bg-black">
               <DropdownMenuSub>
                 <DropdownMenuSubTrigger className="flex items-center">
                   <span>Computer Science</span>
                 </DropdownMenuSubTrigger>
-                <DropdownMenuSubContent className="w-48">
+                <DropdownMenuSubContent className="w-48 bg-black">
                   <DropdownMenuItem>Android</DropdownMenuItem>
                   <DropdownMenuItem>Web</DropdownMenuItem>
                   <DropdownMenuItem>AI</DropdownMenuItem>
@@ -45,19 +48,30 @@ const AppBar = () => {
               </DropdownMenuSub>
 
               <DropdownMenuItem>Finance</DropdownMenuItem>
-              <DropdownMenuItem>Hr</DropdownMenuItem>
+              <DropdownMenuItem>HR</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-
-          <Link href="/about" className="text-sm font-medium  text-primary">
+          <Link
+            href="/about"
+            className="text-sm font-medium  hover:text-primary text-muted-foreground"
+          >
             About Us
           </Link>
-          <Link href="/contact" className="text-sm font-medium text-primary">
+          <Link
+            href="/contact"
+            className="text-sm font-medium hover:text-primary text-muted-foreground"
+          >
             Contact Us
           </Link>
         </div>
-        <div className="flex items-center space-x-4">
-          <Link href={"/login"}>Login</Link>
+
+        <div className="flex items-center space-x-4 ">
+          <Link
+            href={"/login"}
+            className="hover:text-primary text-muted-foreground"
+          >
+            Login
+          </Link>
 
           <Button variant="outline" size="icon">
             <Sun

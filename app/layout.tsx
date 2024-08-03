@@ -13,7 +13,7 @@ const fontSans = FontSans({
 export const metadata: Metadata = {
   title: "KnownVex",
   description: "Course Selling Website",
-  icons:""
+  
 };
 
 export default function RootLayout({
@@ -22,7 +22,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased",
@@ -36,6 +36,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <AppBar />
+          
           {children}
           <Footer />
         </ThemeProvider>

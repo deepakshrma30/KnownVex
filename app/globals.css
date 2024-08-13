@@ -67,3 +67,19 @@
     @apply bg-background text-foreground;
   }
 }
+
+.embla {
+  /* overflow: hidden; */
+  display: flex;
+  justify-content: center;
+}
+
+.embla__container {
+  display: flex;
+  align-items: center;
+}
+
+.embla__slide {
+  flex: 0 0 25%; /* Adjust this to change the size of the slides */
+  padding: 0 1rem;
+}

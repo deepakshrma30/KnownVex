@@ -29,17 +29,17 @@ export default function RootLayout({
           fontSans.variable
         )}
       >
-        <ThemeProvider
+        {/* <ThemeProvider
           attribute="class"
-          defaultTheme="system"
-          enableSystem
+          defaultTheme="light"
+          // enableSystem
           disableTransitionOnChange
-        >
+        > */}
           <AppBar />
           
           {children}
           <Footer />
-        </ThemeProvider>
+        {/* </ThemeProvider> */}
       </body>
     </html>
   );

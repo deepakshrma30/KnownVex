@@ -14,25 +14,12 @@ const Aboutus = () => {
             height={300}
             alt="instructor"
             className="object-cover"
-            
           />
         </div>
-        {/* <div className="relative w-[400px] h-full">
-          <Image
-            src={"/images/line.png"}
-            width={600}
-            height={500}
-            
-            alt="dots"
-            className="object-cover"
-          />
-        </div> */}
-
-        {/* text Section */}
 
         <div className="p-8 shadow-2xl space-y-4 max-w-[660px] max-h-[300px] rounded-2xl bg-white mt-8  flex-grow">
           <h2 className="text-sm font-semibold uppercase text-gray-600 mb-2 flex items-center gap-4">
-            <Users size={20} color="black"/>
+            <Users size={20} color="black" />
             About us
           </h2>
           <h3 className="text-2xl font-black text-gray-900">
@@ -46,7 +33,6 @@ const Aboutus = () => {
             need to Succeed in their Careers.
           </p>
           <div className="mt-2 flex items-center space-x-4">
-          
             <Button>Contact Us</Button>
           </div>
         </div>

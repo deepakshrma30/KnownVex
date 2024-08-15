@@ -1,15 +1,17 @@
-import Carousel from "@/components/Carousel";
 import Aboutus from "@/components/homePage/aboutus";
+import Banner from "@/components/homePage/banner";
+import Cards from "@/components/homePage/cards";
 import HeroSection from "@/components/homePage/heroSection";
-import { Button } from "@/components/ui/button";
-import { RocketIcon, TrophyIcon } from "lucide-react";
-import Image from "next/image";
+import Partners from "@/components/homePage/partners";
 
 export default function Home() {
   return (
     <main className=" min-h-screen bg-gradient-to-r  from-blue-50 to-pink-50  ">
-      <HeroSection/>
-      <Aboutus/>
+      <HeroSection />
+      <Aboutus />
+      <Cards />
+      <Banner/>
+      <Partners/>
     </main>
   );
 }

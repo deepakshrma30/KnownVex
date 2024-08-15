@@ -77,14 +77,14 @@ const AppBar = () => {
             />
           </div>
 
-          <Link
-            href={"/login"}
+          <div
+            // href={"/login"}
             className="hover:text-primary  text-muted-foreground"
           >
             <Button>
               <UserRound className="mr-2 h-4 w-4" /> Login
             </Button>
-          </Link>
+          </div>
         </div>
       </div>
     </header>

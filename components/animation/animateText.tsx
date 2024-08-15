@@ -1,42 +1,42 @@
-"use client"
-import React, { useEffect, useRef } from 'react'
+"use client";
+import React, { useEffect, useRef } from "react";
 import { motion, useInView, useAnimation, Variant } from "framer-motion";
 type AnimatedTextProps = {
-    text: string | string[];
-    el?: keyof JSX.IntrinsicElements;
-    className?: string;
-    once?: boolean;
-    repeatDelay?: number;
-    animation?: {
-      hidden: Variant;
-      visible: Variant;
-    };
+  text: string | string[];
+  el?: keyof JSX.IntrinsicElements;
+  className?: string;
+  once?: boolean;
+  repeatDelay?: number;
+  animation?: {
+    hidden: Variant;
+    visible: Variant;
   };
-  const defaultAnimations = {
-    hidden: {
-      opacity: 0,
-      y: 20,
+};
+const defaultAnimations = {
+  hidden: {
+    opacity: 0,
+    y: 20,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.1,
     },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.1,
-      },
-    },
-  };
+  },
+};
 const AnimateText = ({
-    text,
-    el: Wrapper = "p",
-    className,
-    once,
-    repeatDelay,
-    animation = defaultAnimations,
-  }: AnimatedTextProps) => {
-    const controls = useAnimation();
+  text,
+  el: Wrapper = "p",
+  className,
+  once,
+  repeatDelay,
+  animation = defaultAnimations,
+}: AnimatedTextProps) => {
+  const controls = useAnimation();
   const textArray = Array.isArray(text) ? text : [text];
   const ref = useRef(null);
-  const isInView = useInView(ref, { amount: 0.5, once });
+  const isInView = useInView(ref, { once });
 
   useEffect(() => {
     let timeout: NodeJS.Timeout;
@@ -91,7 +91,7 @@ const AnimateText = ({
         ))}
       </motion.span>
     </Wrapper>
-  )
-}
+  );
+};
 
-export default AnimateText
+export default AnimateText;

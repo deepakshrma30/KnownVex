@@ -1,4 +1,5 @@
 import Aboutus from "@/components/homePage/aboutus";
+import Accordian from "@/components/homePage/accordian";
 import Banner from "@/components/homePage/banner";
 import Cards from "@/components/homePage/cards";
 import HeroSection from "@/components/homePage/heroSection";
@@ -12,6 +13,7 @@ export default function Home() {
       <Cards />
       <Banner/>
       <Partners/>
+      <Accordian/>
     </main>
   );
 }

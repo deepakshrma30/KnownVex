@@ -71,7 +71,9 @@
 .banner-3{
   background-image: url('/images/banner3.svg');
 }
-
+.qna{
+  background-image: url('/images/banner4.svg');
+}
 .MyGradient {
   mask-image: linear-gradient(
     to right,
@@ -80,4 +82,21 @@
     rgba(0, 0, 0, 1) 80%,
     rgba(0, 0, 0, 0)
   );
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+  width: 4px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }

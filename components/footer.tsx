@@ -1,76 +1,111 @@
 import React from "react";
-import Link from "next/link";
+
 import { Button } from "./ui/button";
-import { Input } from "./ui/input";
-// import { Separator } from "@/components/ui/separator";
+
+const footerSections = [
+  {
+    heading: "Resources",
+    links: [
+      { name: "Academy" },
+      { name: "Blog" },
+      { name: "Guides" },
+      { name: "Tutorials" },
+      { name: "Support" },
+    ],
+  },
+  {
+    heading: "Company",
+    links: [
+      { name: "About Us" },
+      { name: "Careers" },
+      { name: "Press" },
+      { name: "Partners" },
+      { name: "Contact" },
+    ],
+  },
+  {
+    heading: "Legal",
+    links: [
+      { name: "Privacy Policy" },
+      { name: "Terms of Service" },
+      { name: "Cookie Policy" },
+      { name: "Accessibility" },
+      { name: "Security" },
+    ],
+  },
+];
 
 const Footer = () => {
   return (
-    <footer className="bg-background border-t py-7">
-      <div className="container mx-auto px-2">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 items-start">
-          <div className="md:col-span-2">
-            <h1 className="scroll-m-20 text-2xl font-extrabold tracking-tight lg:text-4xl">
-              KnownVex
-            </h1>
-            <p className="leading-7 [&:not(:first-child)]:mt-6">
-              Knowvex is an Innovative Coach Platform designed to assist
-              Students with Internships, Professional training Programs, Career
-              guidance, and mentorship. Our Aim is to bridge the gap between
-              Education and Employment, providing Students with the resources
-              and support they need to Succeed in their Careers.
+    <footer
+      className="w-full bg-cover bg-center bg-no-repeat h-[37rem] mt-32 relative"
+      style={{ backgroundImage: "url('/images/Footer 17 Dark.svg')" }}
+    >
+      <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3/5 bg-gradient-to-r from-pink-500 to-teal-400 p-8 rounded-xl flex justify-between">
+        <span className="text-2xl font-extrabold text-white">
+          Start Your Journey to Career Excellence Here
+        </span>
+        <div className="flex gap-4">
+          <Button>Get Started</Button>
+          <Button variant={"secondary"}>Contact Us</Button>
+        </div>
+      </div>
+
+      <div className="text-white pt-24 px-36">
+        <div className="flex gap-48">
+          {footerSections.map((section, index) => (
+            <div key={index}>
+              <span className="text-xl font-extrabold mb-1 inline-block">
+                {section.heading}
+              </span>
+              <ul className="text-sm font-light">
+                {section.links.map((link, linkIndex) => (
+                  <li
+                    key={linkIndex}
+                    className="hover:font-bold cursor-pointer"
+                  >
+                    {link.name}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+        <div className="h-1 bg-white opacity-50 my-16"></div>
+        <div className="flex flex-col items-center">
+          <div className="flex gap-4 mb-3">
+            <img
+              className="w-8 transition-transform duration-150 cursor-pointer hover:-translate-y-2"
+              src="./images/twitter.svg"
+              alt="Twitter"
+            />
+
+            <img
+              className="w-8 transition-transform duration-150 cursor-pointer hover:-translate-y-2"
+              src="./images/linkedin.svg"
+              alt="LinkedIn"
+            />
+            <img
+              className="w-8 transition-transform duration-150 cursor-pointer hover:-translate-y-2"
+              src="./images/facebook.svg"
+              alt="Facebook"
+            />
+          </div>
+          <div className="text-center text-sm">
+            <p>© 2019 Lift Media Online S.L.</p>
+            <p>Ronda Sant Pere 52, 08010 Barcelona,</p>
+            <p>
+              Inscripción en el Registro Mercantil de Barcelona. Tomo 46606,
+              Folio 37, Hoja 525271.
             </p>
           </div>
-          <div>
-            <h3 className="text-lg font-semibold mb-4">Company</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link
-                  href="/about"
-                  className="leading-7 [&:not(:first-child)]:mt-6"
-                >
-                  About Us
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/contact"
-                  className="leading-7 [&:not(:first-child)]:mt-6"
-                >
-                  Contact
-                </Link>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h3 className="text-lg font-semibold mb-4">Legal</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link
-                  href="/privacy"
-                  className="leading-7 [&:not(:first-child)]:mt-6"
-                >
-                  Privacy Policy
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/terms"
-                  className="leading-7 [&:not(:first-child)]:mt-6"
-                >
-                  Terms of Service
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div className="mt-8 flex flex-col md:flex-row justify-between items-center">
-          <div className="flex items-center space-x-2 w-full md:w-auto mb-4 md:mb-0">
-            <Input type="email" placeholder="Email" className="max-w-xs" />
-            <Button type="submit">Subscribe</Button>
-          </div>
-          <div className="text-center md:text-right text-gray-600">
-            © {new Date().getFullYear()} KnownVex. All rights reserved.
+          <div className="flex gap-2 items-center self-end mt-8 font-medium">
+            <span>100% Safe and secure Payments with</span>
+            <img
+              className="p-1 bg-white"
+              src="./images/razerPay.svg"
+              alt="RazerPay"
+            />
           </div>
         </div>
       </div>

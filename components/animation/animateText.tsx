@@ -58,6 +58,7 @@ const AnimateText = ({
 
     return () => clearTimeout(timeout);
   }, [isInView]);
+  
   return (
     <Wrapper className={className}>
       <span className="sr-only">{textArray.join(" ")}</span>

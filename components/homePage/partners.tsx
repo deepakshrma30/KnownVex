@@ -2,6 +2,7 @@
 import React from "react";
 
 import Marquee from "@/components/marquee";
+import Reveal from "../animation/reveal";
 
 const marquee = [
   "/images/1.svg",
@@ -21,12 +22,16 @@ const Partners = () => {
   return (
     <section className="py-16">
       <div className="container mx-auto text-center">
-        <h2 className="text-purple-600 text-lg font-semibold">
-          GREAT PARTNERS
-        </h2>
-        <h1 className="text-4xl font-black mt-2 ">
-          COLLABARATIONS & PARTNERSHIP
-        </h1>
+        <Reveal>
+          <h2 className="text-purple-600 text-lg font-semibold">
+            GREAT PARTNERS
+          </h2>
+        </Reveal>
+        <Reveal>
+          <h1 className="text-4xl font-black mt-2 ">
+            COLLABARATIONS & PARTNERSHIP
+          </h1>
+        </Reveal>
         <div className="container h-48 flex  justify-center items-center   mx-auto overflow-x-hidden">
           <Marquee marquee={marquee} />
         </div>

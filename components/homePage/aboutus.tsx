@@ -1,11 +1,14 @@
+
 import { Phone, Users } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 import { Button } from "../ui/button";
+import Reveal from "../animation/reveal";
 
 const Aboutus = () => {
   return (
     <div className="w-full  max-h-[440px] overflow-hidden   bg-gradient-to-r  from-[#5E05FA] to-[#24045D]  ">
+      <Reveal>
       <div className="container flex justify-between space-x-16">
         <div className="flex-shrink-0">
           <Image
@@ -37,6 +40,7 @@ const Aboutus = () => {
           </div>
         </div>
       </div>
+      </Reveal>
     </div>
   );
 };

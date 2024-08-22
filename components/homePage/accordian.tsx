@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import {
   Accordion,
   AccordionItem,
@@ -27,6 +27,7 @@ const data = [
 ];
 
 const Accordian = () => {
+  const [val, setVal] = useState<string>(data[0]?.question);
   return (
     <section className="w-full mt-2 mb-4 h-[400px]">
       <div className="min-w-fit qna   h-full bg-no-repeat bg-center bg-cover flex items-center justify-end overflow-hidden overflow-y-auto">
@@ -38,15 +39,27 @@ const Accordian = () => {
           <Accordion
             type="single"
             collapsible
-            className="rounded-md bg-white text-black p-6 "
+            className="flex flex-col gap-4"
+            value={val}
           >
             {data?.map((item, index) => (
-              <AccordionItem key={index} value={item?.question}>
-                <AccordionTrigger>{item?.question}</AccordionTrigger>
-                <AccordionContent className="text-left font-normal break-words max-w-[800px]   overflow-hidden  overflow-y-auto">
-                  {item?.answer}
-                </AccordionContent>
-              </AccordionItem>
+              <div
+                key={index}
+                className="rounded-md bg-white text-black pl-4 pr-4"
+              >
+                <AccordionItem
+                  key={index}
+                  value={item?.question}
+                  onClick={() => {
+                    setVal(item?.question);
+                  }}
+                >
+                  <AccordionTrigger>{item?.question}</AccordionTrigger>
+                  <AccordionContent className="text-left font-normal break-words max-w-[800px]   overflow-hidden  overflow-y-auto">
+                    {item?.answer}
+                  </AccordionContent>
+                </AccordionItem>
+              </div>
             ))}
           </Accordion>
         </div>

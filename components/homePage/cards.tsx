@@ -1,8 +1,10 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Bot, Home, TabletSmartphone } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Reveal from "../animation/reveal";
+import ThreeDCard from "../animation/ThreeDCard";
 
 const cardData = [
   {
@@ -32,9 +34,23 @@ const cardData = [
 ];
 
 const Cards = () => {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const handleMouseMove = (e: any) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    setMousePosition({ x, y });
+  };
+
+  const transformStyle = {
+    transform: `perspective(1000px) rotateX(${
+      mousePosition.y * 10
+    }deg) rotateY(${mousePosition.x * 10}deg) scale(1.05)`,
+    transition: "transform 0.1s ease-out",
+  };
   return (
     <div>
-      <section className="py-16">
+      <section className="py-14">
         <div className="container mx-auto text-center">
           <Reveal>
             <h2 className="text-purple-600 text-lg font-semibold">
@@ -52,35 +68,7 @@ const Cards = () => {
           <Reveal>
             <div className="flex flex-wrap justify-center gap-6">
               {cardData?.map((item, index) => (
-                <Card
-                  key={index}
-                  className={cn(
-                    "max-w-[316px] bg-white text-black p-2 rounded-lg shadow-lg  hover:cursor-pointer",
-                    {
-                      "mt-6": index % 2 !== 0,
-                      "bg-[#807AF9] text-white": index === 0,
-                    }
-                  )}
-                >
-                  <CardHeader>
-                    <div className="flex items-centre justify-start mb-4">
-                      <span
-                        className={cn(
-                          "inline-block p-3 rounded-full bg-[#FFEFDD] text-purple-500",
-                          { "bg-white": index === 0 }
-                        )}
-                      >
-                        {item?.icon}
-                      </span>
-                    </div>
-                    <CardTitle className="text-xl font-bold text-left">
-                      {item?.title}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-left">{item?.description}</p>
-                  </CardContent>
-                </Card>
+                <ThreeDCard key={index} index={index} icon={item?.icon} title={item?.title} description={item?.description}/>
               ))}
             </div>
           </Reveal>

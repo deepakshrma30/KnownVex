@@ -38,15 +38,18 @@ const Accordian = () => {
           <Accordion
             type="single"
             collapsible
-            className="rounded-md bg-white text-black p-6 "
+            className="flex flex-col gap-4"
+            value={data[0]?.question}
           >
             {data?.map((item, index) => (
+              <div className="rounded-md bg-white text-black pl-4 pr-4">
               <AccordionItem key={index} value={item?.question}>
                 <AccordionTrigger>{item?.question}</AccordionTrigger>
                 <AccordionContent className="text-left font-normal break-words max-w-[800px]   overflow-hidden  overflow-y-auto">
                   {item?.answer}
                 </AccordionContent>
               </AccordionItem>
+              </div>
             ))}
           </Accordion>
         </div>

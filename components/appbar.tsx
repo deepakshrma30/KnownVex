@@ -3,7 +3,7 @@
 import Link from "next/link";
 import React from "react";
 import { useTheme } from "next-themes";
-import {motion} from "framer-motion"
+import { motion } from "framer-motion";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -43,7 +43,9 @@ const AppBar = () => {
                 </DropdownMenuSubTrigger>
                 <DropdownMenuSubContent className="w-48">
                   <DropdownMenuItem>Android</DropdownMenuItem>
-                  <DropdownMenuItem>Web</DropdownMenuItem>
+                  <Link href={"/web"}>
+                    <DropdownMenuItem>Web</DropdownMenuItem>
+                  </Link>
                   <DropdownMenuItem>AI</DropdownMenuItem>
                   <DropdownMenuItem>DevOps</DropdownMenuItem>
                 </DropdownMenuSubContent>

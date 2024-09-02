@@ -11,6 +11,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Calendar, FileText, Users } from "lucide-react";
+import Reveal from "@/components/animation/reveal";
 
 const words = [
   {
@@ -46,6 +48,31 @@ const tabs = [
     description: "dfgfdg",
   },
 ];
+
+const features = [
+  {
+    title: "Online Billing, Invoicing, & Contracts",
+    description:
+      "Simple and secure control of your organization's financial and legal transactions. Send customized invoices and contracts.",
+    icon: <FileText className="text-white w-6 h-6" />,
+    bgColor: "bg-blue-500",
+  },
+  {
+    title: "Easy Scheduling & Attendance Tracking",
+    description:
+      "Schedule and reserve classrooms at one campus or multiple campuses. Keep detailed records of student attendance.",
+    icon: <Calendar className="text-white w-6 h-6" />,
+    bgColor: "bg-orange-500",
+  },
+  {
+    title: "Customer Tracking",
+    description:
+      "Simple and secure control of your organization's financial and legal transactions. Send customized invoices and contracts.",
+    icon: <Users className="text-white w-6 h-6" />,
+    bgColor: "bg-cyan-500",
+  },
+];
+
 const page = () => {
   return (
     <>
@@ -107,33 +134,74 @@ const page = () => {
       </section>
 
       {/* tabs */}
-      <section className="container p-4  mt-4 relative">
-        <Tabs defaultValue="tab1">
-          <TabsList className="grid grid-cols-3  w-full  bg-slate-950 text-white">
+      <Reveal>
+        <section className="container p-4  mt-4 relative">
+          <Tabs defaultValue="tab1">
+            <TabsList className="grid grid-cols-3  w-full  bg-slate-950 text-white">
+              {tabs.map((tab) => (
+                <TabsTrigger
+                  key={tab.id}
+                  value={tab.id}
+                  className=" data-[state=active]:bg-[#4805BE]  data-[state=active]:text-white"
+                >
+                  {tab.heading}
+                </TabsTrigger>
+              ))}
+            </TabsList>
             {tabs.map((tab) => (
-              <TabsTrigger
-                key={tab.id}
-                value={tab.id}
-                className=" data-[state=active]:bg-[#4805BE]  data-[state=active]:text-white"
-              >
-                {tab.heading}
-              </TabsTrigger>
+              <TabsContent key={tab.id} value={tab.id}>
+                <Card>
+                  <CardHeader>
+                    <CardTitle>{tab.heading}</CardTitle>
+                    <CardDescription>{tab.description}</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <p>{tab.content}</p>
+                  </CardContent>
+                </Card>
+              </TabsContent>
             ))}
-          </TabsList>
-          {tabs.map((tab) => (
-            <TabsContent key={tab.id} value={tab.id}>
-              <Card>
-                <CardHeader>
-                  <CardTitle>{tab.heading}</CardTitle>
-                  <CardDescription>{tab.description}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <p>{tab.content}</p>
-                </CardContent>
-              </Card>
-            </TabsContent>
-          ))}
-        </Tabs>
+          </Tabs>
+        </section>
+      </Reveal>
+
+      <section className="container mt-4 ">
+        <Reveal>
+          <div className="text-center mb-12">
+            <h2 className="text-lg font-semibold text-purple-600 mb-2">
+              ABOUT THE COURSES
+            </h2>
+            <h1 className="text-4xl font-bold">WHY LEARN FROM KNOWVEX?</h1>
+          </div>
+        </Reveal>
+        <Reveal>
+          <div className="flex justify-center">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-10  mt-8">
+              {features.map((feature, index) => (
+                <Card
+                  key={index}
+                  className="bg-white max-w-[350px] min-h-full p-4 flex flex-col items-center justify-evenly  shadow-lg rounded-lg relative hover:cursor-pointer"
+                >
+                  <CardHeader className="pb-4 mb-2 flex flex-col items-center">
+                    <div
+                      className={`w-12 h-12 absolute -top-6 left-1/2 transform -translate-x-1/2 ${feature.bgColor} rounded-full flex items-center justify-center mb-4`}
+                    >
+                      {feature.icon}
+                    </div>
+                    <CardTitle className="text-lg font-semibold text-gray-800 text-center">
+                      {feature.title}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm text-gray-600 text-center">
+                      {feature.description}
+                    </p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </Reveal>
       </section>
     </>
   );

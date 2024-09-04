@@ -1,5 +1,7 @@
+"use client";
 import { TypewriterEffectSmooth } from "@/components/animation/typewritersmooth";
 import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Image from "next/image";
 import React from "react";
@@ -73,6 +75,35 @@ const features = [
   },
 ];
 
+const highlights = [
+  "heelo",
+  "very good",
+  "super doopercull",
+  "awesomesauce",
+  "fantabulous",
+  "amaze-balls",
+  "wonderiffic",
+  "splendiferous",
+  "marvytastic",
+  "coolio",
+  "epicness",
+  "neat-o",
+  "radicalicious",
+  "heelo",
+  "very good",
+  "super doopercull",
+  "awesomesauce",
+  "fantabulous",
+  "amaze-balls",
+  "wonderiffic",
+  "splendiferous",
+  "marvytastic",
+  "coolio",
+  "epicness",
+  "neat-o",
+  "radicalicious",
+];
+
 const page = () => {
   return (
     <>
@@ -87,7 +118,7 @@ const page = () => {
             <span className="text-purple-500">Web Development</span> With Us?
           </h2>
           <p className="text-xl">
-            We Can't Wait To Explore Creativity And Build Amazing Websites
+            We Can&apos;t Wait To Explore Creativity And Build Amazing Websites
             Together!
           </p>
           <Button className="mt-4 rounded-full">Start Course Now</Button>
@@ -151,13 +182,20 @@ const page = () => {
             {tabs.map((tab) => (
               <TabsContent key={tab.id} value={tab.id}>
                 <Card>
-                  <CardHeader>
-                    <CardTitle>{tab.heading}</CardTitle>
-                    <CardDescription>{tab.description}</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <p>{tab.content}</p>
-                  </CardContent>
+                  <motion.div
+                    initial={{ y: 10, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ y: -10, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <CardHeader>
+                      <CardTitle>{tab.heading}</CardTitle>
+                      <CardDescription>{tab.description}</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <p>{tab.content}</p>
+                    </CardContent>
+                  </motion.div>
                 </Card>
               </TabsContent>
             ))}
@@ -202,6 +240,30 @@ const page = () => {
             </div>
           </div>
         </Reveal>
+      </section>
+
+      <section className="container mt-8 p-4">
+        <div className="text-center">
+          <h3 className="scroll-m-20 text-2xl font-extrabold tracking-tight lg:text-4xl">
+            Key Highlights of our{" "}
+            <span className="text-purple-500">Web Development</span> program
+          </h3>
+        </div>
+
+        <div className="w-full max-w-4xl mx-auto p-6 ">
+          <div className="flex flex-wrap justify-center gap-3">
+            {highlights.map((highlight, index) => (
+              <motion.div
+                whileHover={{ scale: 1.1, backgroundColor: "black", y: -1 }}
+                transition={{ duration: 0.3, ease: "linear" }}
+                key={index}
+                className="bg-purple-500 text-white px-4 py-2 rounded-full text-sm font-medium cursor-pointer  hover:text-white"
+              >
+                {highlight}
+              </motion.div>
+            ))}
+          </div>
+        </div>
       </section>
     </>
   );

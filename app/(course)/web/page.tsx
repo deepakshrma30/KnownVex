@@ -104,6 +104,15 @@ const highlights = [
   "radicalicious",
 ];
 
+const services = [
+  { label: "SOFT SKILL", src: "/images/soft.png" },
+  { label: "Mock Interviews", src: "/images/mock.png" },
+  { label: "Portfolio Building", src: "/images/porfolio.png" },
+  { label: "Resume Building", src: "/images/cv.png" },
+  { label: "Mock Tests", src: "/images/mtest.png" },
+  { label: "Interview", src: "/images/interview.png" },
+];
+
 const page = () => {
   return (
     <>
@@ -265,6 +274,44 @@ const page = () => {
           </div>
         </div>
       </section>
+
+      <Reveal>
+      <section className="container mt-8 p-4">
+        <div className="flex flex-col lg:flex-row items-center justify-evenly   px-4 lg:px-16 py-8">
+          {/* left section  */}
+          <div className="text-center lg:text-left mb-8 lg:mb-0 lg:max-w-md">
+            <h1 className="font-bold text-purple-600 text-4xl">Career Boost</h1>
+            <p className="mt-4 text-gray-700">
+              Unlock Your Potential With Dedicated Support That Prepares You For
+              Real-World Success!
+            </p>
+          </div>
+
+          {/* right section  */}
+
+          <div className="relative w-full lg:max-w-xl">
+            <div className="absolute inset-0 h-1/2 top-20 w-full bg-purple-200 rounded-lg -z-10" />
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
+              {services?.map((item, index) => (
+                <div
+                  key={index}
+                  className="flex flex-col items-center space-y-1 justify-center bg-white shadow-md rounded-lg p-4"
+                >
+                  {/* <div className="text-purple-600 mb-4">
+                  {item.icon}
+                  </div> */}
+                  <img src={item.src} className="h-28 object-cover" />
+                  <p className="text-sm font-semibold text-gray-700">
+                    {item.label}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      </Reveal>
     </>
   );
 };

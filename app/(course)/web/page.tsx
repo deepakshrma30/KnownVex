@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/card";
 import { Calendar, FileText, Users } from "lucide-react";
 import Reveal from "@/components/animation/reveal";
+import PricingPlanCard from "@/components/PricingPlan";
 
 const words = [
   {
@@ -113,12 +114,60 @@ const services = [
   { label: "Interview", src: "/images/interview.png" },
 ];
 
+const pricingPlans = [
+  {
+    title: "Basic",
+    description: "For individuals and small teams",
+    price: "$9",
+    recommended:false,
+    features: [
+      { name: "Up to 5 projects", included: true },
+      { name: "Up to 10 users", included: true },
+      { name: "Basic analytics", included: true },
+      { name: "24/7 support", included: true },
+      { name: "Custom integrations", included: false },
+      { name: "Dedicated account manager", included: false },
+      { name: "AI-powered insights", included: false },
+    ],
+  },
+  {
+    title: "Pro",
+    description: "For growing businesses",
+    price: "$29",
+    recommended:true,
+    features: [
+      { name: "Unlimited projects", included: true },
+      { name: "Up to 50 users", included: true },
+      { name: "Advanced analytics", included: true },
+      { name: "Priority support", included: true },
+      { name: "Custom integrations", included: true },
+      { name: "Dedicated account manager", included: false },
+      { name: "AI-powered insights", included: false },
+    ],
+  },
+  {
+    title: "Enterprise",
+    description: "For large organizations",
+    price: "$99",
+    recommended:false,
+    features: [
+      { name: "Unlimited projects", included: true },
+      { name: "Unlimited users", included: true },
+      { name: "Advanced analytics", included: true },
+      { name: "24/7 premium support", included: true },
+      { name: "Custom integrations", included: true },
+      { name: "Dedicated account manager", included: true },
+      { name: "AI-powered insights", included: true },
+    ],
+  },
+];
+
 const page = () => {
   return (
     <>
       <section className="flex container mt-4  flex-col md:flex-row items-center justify-between">
         {/* left section  */}
-        <div className="text-center md:text-left md:w-1/2 space-y-6">
+        <div className="text-center md:text-left  md:w-1/2 space-y-6">
           <TypewriterEffectSmooth words={words} />
           {/* Elevate Your Skills with Innovative Web Development Training */}
 
@@ -276,41 +325,64 @@ const page = () => {
       </section>
 
       <Reveal>
-      <section className="container mt-8 p-4">
-        <div className="flex flex-col lg:flex-row items-center justify-evenly   px-4 lg:px-16 py-8">
-          {/* left section  */}
-          <div className="text-center lg:text-left mb-8 lg:mb-0 lg:max-w-md">
-            <h1 className="font-bold text-purple-600 text-4xl">Career Boost</h1>
-            <p className="mt-4 text-gray-700">
-              Unlock Your Potential With Dedicated Support That Prepares You For
-              Real-World Success!
-            </p>
-          </div>
+        <section className="container mt-8 p-4">
+          <div className="flex flex-col lg:flex-row items-center justify-evenly   px-4 lg:px-16 py-8">
+            {/* left section  */}
+            <div className="text-center lg:text-left mb-8 lg:mb-0 lg:max-w-md">
+              <h1 className="font-bold text-purple-600 text-4xl">
+                Career Boost
+              </h1>
+              <p className="mt-4 text-gray-700">
+                Unlock Your Potential With Dedicated Support That Prepares You
+                For Real-World Success!
+              </p>
+            </div>
 
-          {/* right section  */}
+            {/* right section  */}
 
-          <div className="relative w-full lg:max-w-xl">
-            <div className="absolute inset-0 h-1/2 top-20 w-full bg-purple-200 rounded-lg -z-10" />
-            <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
-              {services?.map((item, index) => (
-                <div
-                  key={index}
-                  className="flex flex-col items-center space-y-1 justify-center bg-white shadow-md rounded-lg p-4"
-                >
-                  {/* <div className="text-purple-600 mb-4">
+            <div className="relative w-full lg:max-w-xl">
+              <div className="absolute inset-0 h-1/2 top-20 w-full bg-purple-200 rounded-lg -z-10" />
+              <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
+                {services?.map((item, index) => (
+                  <div
+                    key={index}
+                    className="flex flex-col items-center space-y-1 justify-center bg-white shadow-md rounded-lg p-4"
+                  >
+                    {/* <div className="text-purple-600 mb-4">
                   {item.icon}
                   </div> */}
-                  <img src={item.src} className="h-28 object-cover" />
-                  <p className="text-sm font-semibold text-gray-700">
-                    {item.label}
-                  </p>
-                </div>
-              ))}
+                    <img src={item.src} className="h-28 object-cover" />
+                    <p className="text-sm font-semibold text-gray-700">
+                      {item.label}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
+        </section>
+      </Reveal>
+
+      {/* pricing plan  */}
+      <Reveal>
+
+      <section className="container mx-auto py-12 px-4">
+        <h3 className="scroll-m-20 text-center text-2xl font-extrabold tracking-tight lg:text-4xl">
+          Choose Your Plan
+        </h3>
+        <div className="grid gap-8 justify-center items-center grid-cols-3 mt-4">
+          {pricingPlans.map((plan) => (
+            <PricingPlanCard
+              key={plan.title}
+              title={plan.title}
+              description={plan.description}
+              price={plan.price}
+              features={plan.features}
+              recommended={plan.recommended}
+            />
+          ))}
         </div>
       </section>
-
       </Reveal>
     </>
   );

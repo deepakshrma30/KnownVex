@@ -16,7 +16,7 @@ interface Props {
   index: number;
 }
 
-const ThreeDCard = ({ icon, title, description, index }: Props) => {
+const  ThreeDCard = ({ icon, title, description, index }: Props) => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {

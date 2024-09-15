@@ -1,0 +1,5 @@
+# Ignore application.properties
+src/main/resources/*.properties
+.next
+.idea
+target

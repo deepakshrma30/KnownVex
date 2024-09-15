@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Knowvex</title>
+</head>
+<body>
+<div style="margin: 1rem auto;">
+    <div style="text-align: center; margin-bottom: 1rem;">
+        <img th:src="${logo}" alt="Knowvex Logo" />
+    </div>
+    <h2>Hi <span th:text="${name}" style="text-transform: capitalize;"></span>,</h2>
+    <p>Here is your One Time Password (OTP).<br />Please enter this code to verify your email address for Knowvex.</p>
+    <div style="margin: 0 auto; font-size: 1.25rem; font-weight: 700; text-align: center;">
+        <span th:each="digit : ${otp}" th:text="${digit}" style="padding: 0.75rem; background: rgba(137, 40, 220, 0.09); border-radius: 0.5rem; display: inline-block; margin-right: 0.5rem;"></span>
+    </div>
+    <p>OTP will expire in <b>10 minutes.</b></p>
+    <p>Best Regards,<br /><span style="color: #8606f9;">Knowvex team.</span></p>
+    <div style="border-top: 1px solid #d9d9d9; border-bottom: 1px solid #d9d9d9; padding: 0.5rem 0; margin-top: 1rem; text-align: center;">
+        <a href="https://facebook.com" style="display: inline-block;">
+            <img th:src="${facebook}" style="width: 1.25rem;">
+        </a>
+        <a href="https://instagram.com" style="margin-left: 0.5rem;">
+            <img th:src="${instagram}" style="width: 1.25rem;">
+        </a>
+    </div>
+    <p style="text-align: center; font-size: 0.85rem;">© 2024 Knowvex. All rights reserved.</p>
+</div>
+</body>
+</html>

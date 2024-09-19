@@ -226,7 +226,7 @@ const ContactUs = () => {
               Get in touch
             </h2>
             <p className="mb-4 sm:mb-6 text-gray-600">
-              We'd love to hear from you. Please fill out the form or use the
+              We&apos;d love to hear from you. Please fill out the form or use the
               contact details below to reach us.
             </p>
             <div className="space-y-3 sm:space-y-4">

@@ -16,9 +16,14 @@ import {
 import { ChevronDown, Mail, Moon, Search, Sun, UserRound } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useCounterStore } from "@/provider/counterProvider";
 
 const AppBar = () => {
   const { setTheme } = useTheme();
+  const { count, incrementCount, decrementCount,handleLogin,open } = useCounterStore(
+    (state) => state,
+  )
+  console.log(open,"count")
   return (
     <header className="sticky top-0 z-40 w-full border-b bg-white">
       <div className="container flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
@@ -83,7 +88,7 @@ const AppBar = () => {
             // href={"/login"}
             className="hover:text-primary  text-muted-foreground"
           >
-            <Button>
+            <Button onClick={handleLogin}>
               <UserRound className="mr-2 h-4 w-4" /> Login
             </Button>
           </div>

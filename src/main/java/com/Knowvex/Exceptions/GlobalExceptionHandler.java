@@ -1,5 +1,7 @@
 package com.Knowvex.Exceptions;
 
+import com.Knowvex.Exceptions.CustomExceptions.CartItemAlreadyExistsException;
+import com.Knowvex.Exceptions.CustomExceptions.UserNotAuthenticatedException;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +19,17 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ConstraintViolationException.class)
     private ResponseEntity<String> exceptionHandler(ConstraintViolationException e){
         return ResponseEntity.badRequest().body(e.getMessage());
+    }
+
+
+    @ExceptionHandler(UserNotAuthenticatedException.class)
+    public ResponseEntity<String> handleUserNotAuthenticated(UserNotAuthenticatedException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.UNAUTHORIZED);
+    }
+
+    @ExceptionHandler(CartItemAlreadyExistsException.class)
+    public ResponseEntity<String> handleCartItemExists(CartItemAlreadyExistsException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.CONFLICT);
     }
 
     @ExceptionHandler(Exception.class)

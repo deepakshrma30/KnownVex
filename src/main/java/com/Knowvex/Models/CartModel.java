@@ -31,5 +31,6 @@ public class CartModel {
     private PlanEnum plan;
 
     @CreationTimestamp
+    @JsonIgnore
     private Timestamp createdAt;
 }

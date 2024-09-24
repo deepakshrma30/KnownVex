@@ -10,16 +10,22 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.sql.Timestamp;
 import java.time.LocalTime;
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Entity
 @Table(name = "knowvex_user")
 @Data
-public class UserModel {
+public class UserModel implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -62,15 +68,14 @@ public class UserModel {
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private RoleEnum role = RoleEnum.USER;
 
-    @Column
     @CreationTimestamp
-    @JsonIgnore
-    private Timestamp createdAt;
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @Column(updatable = false)
+    Timestamp createdAt;
 
-    @Column
     @UpdateTimestamp
-    @JsonIgnore
-    private Timestamp updatedAt;
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    Timestamp updatedAt;
 
     @PrePersist
     @PreUpdate
@@ -80,7 +85,45 @@ public class UserModel {
         }
     }
 
-    @OneToMany(mappedBy = "user")
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    List<CartModel> carts;
+//    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+//    @JsonIgnore
+//    private List<CartModel> carts;
+
+    @Override
+    @JsonIgnore
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return Stream.of(this.role)
+                .map(role -> new SimpleGrantedAuthority(role.name()))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    @JsonIgnore
+    public String getUsername() {
+        return this.email;
+    }
+
+    @Override
+    @JsonIgnore
+    public boolean isAccountNonExpired() {
+        return UserDetails.super.isAccountNonExpired();
+    }
+
+    @Override
+    @JsonIgnore
+    public boolean isAccountNonLocked() {
+        return UserDetails.super.isAccountNonLocked();
+    }
+
+    @Override
+    @JsonIgnore
+    public boolean isCredentialsNonExpired() {
+        return UserDetails.super.isCredentialsNonExpired();
+    }
+
+    @Override
+    @JsonIgnore
+    public boolean isEnabled() {
+        return this.active;
+    }
 }

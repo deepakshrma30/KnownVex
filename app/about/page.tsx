@@ -26,7 +26,7 @@ const About = () => {
               Knownvex is an edtech platform that helps students with
               internships, professional training programs, career guidance, and
               mentorship. Our aim is to bridge the gap between formal education
-              and the ever changing requirements of the industry. We at Corizo
+              and the ever changing requirements of the industry. We at Knowvex
               bring together the students aiming for successful careers,
               knowledge and experience accumulated over the years by our
               industry experts to create a holistic learning platform. Our
@@ -78,10 +78,10 @@ const About = () => {
 
       <section className="container mt-4 py-12 px-4 sm:px-6 lg:px-8 ">
         <div className="text-center mb-12">
-          {/* <h2 className="text-lg font-semibold text-purple-600 mb-2">
-              ABOUT THE COURSES
-            </h2> */}
-          <h1 className="text-4xl font-bold">WHY LEARN FROM KNOWVEX?</h1>
+          <h2 className="text-lg font-semibold text-purple-600 mb-2">
+            GREAT TEAM MEMBERS
+            </h2>
+          <h1 className="text-4xl font-bold">We Have Expert Team</h1>
         </div>
         <Carousel
           opts={{

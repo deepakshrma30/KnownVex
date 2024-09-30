@@ -47,17 +47,26 @@ const AppBar = () => {
                   <span>Computer Science</span>
                 </DropdownMenuSubTrigger>
                 <DropdownMenuSubContent className="w-48">
+                  <Link href={"/course/android"}>
                   <DropdownMenuItem>Android</DropdownMenuItem>
-                  <Link href={"/web"}>
+                  </Link>
+                  <Link href={"/course/web"}>
                     <DropdownMenuItem>Web</DropdownMenuItem>
                   </Link>
+                  <Link href={"/course/ai"}>
                   <DropdownMenuItem>AI</DropdownMenuItem>
+                  </Link>
+                  <Link href={"/course/devops"}>
                   <DropdownMenuItem>DevOps</DropdownMenuItem>
+                  </Link>
                 </DropdownMenuSubContent>
               </DropdownMenuSub>
-
+              <Link href={"/course/finance"}>
               <DropdownMenuItem>Finance</DropdownMenuItem>
+              </Link>
+              <Link href={"/course/hr"}>
               <DropdownMenuItem>HR</DropdownMenuItem>
+              </Link>
             </DropdownMenuContent>
           </DropdownMenu>
           <Link
@@ -75,14 +84,14 @@ const AppBar = () => {
         </div>
 
         <div className="flex items-center space-x-4 ">
-          <div className="relative w-full">
+          {/* <div className="relative w-full">
             <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
             <Input
               type="search"
               placeholder="Search..."
               className="pl-8 w-full"
             />
-          </div>
+          </div> */}
 
           <div
             // href={"/login"}

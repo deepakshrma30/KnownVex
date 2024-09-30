@@ -1,9 +1,10 @@
 
-import { Phone, Users } from "lucide-react";
+import {Users } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 import { Button } from "../ui/button";
 import Reveal from "../animation/reveal";
+import Link from "next/link";
 
 const Aboutus = () => {
   return (
@@ -36,7 +37,9 @@ const Aboutus = () => {
             need to Succeed in their Careers.
           </p>
           <div className="mt-2 flex items-center space-x-4">
-            <Button>Contact Us</Button>
+            <Link href="/contact">
+              <Button>Contact Us</Button>
+            </Link>
           </div>
         </div>
       </div>

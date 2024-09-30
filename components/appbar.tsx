@@ -16,9 +16,14 @@ import {
 import { ChevronDown, Mail, Moon, Search, Sun, UserRound } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useCounterStore } from "@/provider/counterProvider";
 
 const AppBar = () => {
   const { setTheme } = useTheme();
+  const { count, incrementCount, decrementCount,handleLogin,open } = useCounterStore(
+    (state) => state,
+  )
+  console.log(open,"count")
   return (
     <header className="sticky top-0 z-40 w-full border-b bg-white">
       <div className="container flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
@@ -42,17 +47,26 @@ const AppBar = () => {
                   <span>Computer Science</span>
                 </DropdownMenuSubTrigger>
                 <DropdownMenuSubContent className="w-48">
+                  <Link href={"/course/android"}>
                   <DropdownMenuItem>Android</DropdownMenuItem>
-                  <Link href={"/web"}>
+                  </Link>
+                  <Link href={"/course/web"}>
                     <DropdownMenuItem>Web</DropdownMenuItem>
                   </Link>
+                  <Link href={"/course/ai"}>
                   <DropdownMenuItem>AI</DropdownMenuItem>
+                  </Link>
+                  <Link href={"/course/devops"}>
                   <DropdownMenuItem>DevOps</DropdownMenuItem>
+                  </Link>
                 </DropdownMenuSubContent>
               </DropdownMenuSub>
-
+              <Link href={"/course/finance"}>
               <DropdownMenuItem>Finance</DropdownMenuItem>
+              </Link>
+              <Link href={"/course/hr"}>
               <DropdownMenuItem>HR</DropdownMenuItem>
+              </Link>
             </DropdownMenuContent>
           </DropdownMenu>
           <Link
@@ -70,20 +84,20 @@ const AppBar = () => {
         </div>
 
         <div className="flex items-center space-x-4 ">
-          <div className="relative w-full">
+          {/* <div className="relative w-full">
             <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
             <Input
               type="search"
               placeholder="Search..."
               className="pl-8 w-full"
             />
-          </div>
+          </div> */}
 
           <div
             // href={"/login"}
             className="hover:text-primary  text-muted-foreground"
           >
-            <Button>
+            <Button onClick={handleLogin}>
               <UserRound className="mr-2 h-4 w-4" /> Login
             </Button>
           </div>

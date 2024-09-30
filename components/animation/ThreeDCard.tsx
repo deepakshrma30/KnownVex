@@ -1,23 +1,26 @@
 "use client";
-import React, { createContext, useState } from "react";
+import React, { useState } from "react";
 import {
   Card,
   CardHeader,
   CardTitle,
-  CardDescription,
   CardContent,
 } from "../ui/card";
 import { cn } from "@/lib/utils";
+import { useRouter } from "next/navigation";
 
 interface Props {
   icon: React.ReactNode;
   title: string;
   description: string;
   index: number;
+  path: string;
 }
 
-const ThreeDCard = ({ icon, title, description, index }: Props) => {
+const ThreeDCard = ({ icon, index,title, description,path }: Props) => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isHovered, setIsHovered] = useState(false);
+  const router = useRouter();
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -26,32 +29,46 @@ const ThreeDCard = ({ icon, title, description, index }: Props) => {
     setMousePosition({ x, y });
   };
 
+  const navigate = () => {
+    router.push(path);
+  }
+
   const transformStyle = {
-    transform: `perspective(1000px) rotateX(${
-      mousePosition.y * 10
-    }deg) rotateY(${mousePosition.x * 10}deg) scale(1.05)`,
+    transform: `perspective(1000px) rotateX(${mousePosition.y * 20}deg) rotateY(${
+      mousePosition.x * 20
+    }deg) scale(1.05)`,
     transition: "transform 0.2s ease-out",
     borderRadius: "10px",
   };
+
   return (
     <Card
       className={cn(
-        "max-w-[316px] bg-white text-black p-2 rounded-lg shadow-2xl  hover:cursor-pointer",
+        "max-w-[316px] p-2 rounded-lg shadow-2xl hover:cursor-pointer transition-colors duration-300",
         {
           "mt-6": index % 2 !== 0,
-          "bg-[#807AF9] text-white": index === 0,
+          "bg-[#807AF9] text-white": isHovered, 
+          "bg-white text-black": !isHovered, 
         }
       )}
       onMouseMove={handleMouseMove}
-      onMouseLeave={() => setMousePosition({ x: 0, y: 0 })}
+      onMouseLeave={() => {
+        setMousePosition({ x: 0, y: 0 });
+        setIsHovered(false); 
+      }}
+      onMouseEnter={() => setIsHovered(true)} 
+      onClick={() => navigate()}
       style={mousePosition.x || mousePosition.y ? transformStyle : {}}
     >
       <CardHeader>
-        <div className="flex items-centre justify-start mb-4">
+        <div className="flex items-center justify-start mb-4">
           <span
             className={cn(
-              "inline-block p-3 rounded-full bg-[#FFEFDD] text-purple-500",
-              { "bg-white": index === 0 }
+              "inline-block p-3 rounded-full text-purple-500 transition-colors duration-300",
+              { 
+                "bg-white": isHovered, 
+                "bg-[#FFEFDD]": !isHovered 
+              }
             )}
           >
             {icon}

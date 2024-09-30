@@ -1,5 +1,6 @@
 package com.Knowvex.Services.Imp;
 
+import com.Knowvex.Models.CartModel;
 import com.Knowvex.Models.UserModel;
 import com.Knowvex.Repositories.UserRepository;
 import lombok.AllArgsConstructor;
@@ -13,6 +14,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -30,10 +32,6 @@ public class UserDetailServiceImp implements UserDetailsService {
         if(userModel.isEmpty()){
             throw new UsernameNotFoundException("User not found: " + username);
         }
-        UserModel user = userModel.get();
-        List<GrantedAuthority> authorityList =  Stream.of(user.getRole())
-                .map(role -> new SimpleGrantedAuthority(role.name()))
-                .collect(Collectors.toList());
-        return new User(user.getEmail(),user.getPassword(),authorityList);
+        return userModel.get();
     }
 }

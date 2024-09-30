@@ -116,12 +116,16 @@ public class UserServiceImp implements UserService {
         if (!authentication.isAuthenticated()) {
             throw new UsernameNotFoundException("Invalid user request!");
         }
-        String token = jwtUtil.generateToken(user.getEmail());
+
+        UserModel userModel = (UserModel) authentication.getPrincipal();
+
+        String token = jwtUtil.generateToken(userModel.getEmail(),userModel.getId());
 
         Cookie cookie=new Cookie(AUTH_KEY,token);
+        cookie.setPath("/knowvex");
         response.addCookie(cookie);
 
-        return userRepository.findByEmailIgnoreCase(user.getEmail());
+        return userModel;
     }
 
     private void validateUser(UserModel user) {

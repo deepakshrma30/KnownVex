@@ -4,7 +4,7 @@ import lombok.Getter;
 
 @Getter
 public enum PlanEnum {
-     SELF(10),MENTOR(20),PROFESSIONAL(30);
+     SELF(5000),MENTOR(6000),PROFESSIONAL(8000);
 
      private final long AMOUNT;
 

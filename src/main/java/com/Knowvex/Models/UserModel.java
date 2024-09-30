@@ -73,6 +73,7 @@ public class UserModel implements UserDetails {
     @Column(updatable = false)
     Timestamp createdAt;
 
+    @Column
     @UpdateTimestamp
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     Timestamp updatedAt;

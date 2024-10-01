@@ -6,18 +6,18 @@ function TermsAndConditionsPage() {
     <Reveal>
       <section className="container mt-8">
         <p className="mb-2 font-extralight text-sm">
-          The terms <strong>"We," "Us," "Our,"</strong> and <strong>"Company"</strong> individually and collectively refer to <strong>Institution 1</strong>, and the terms <strong>"Visitor," "User"</strong> refer to the users of this website.
+          The terms <strong>&quot;We,&quot; &quot;Us,&quot; &quot;Our,&quot;</strong> and <strong>&quot;Company&quot;</strong> individually and collectively refer to <strong>Institution 1</strong>, and the terms <strong>&quot;Visitor,&quot; &quot;User&quot;</strong> refer to the users of this website.
         </p>
 
         <p className="mb-2 font-extralight text-sm">
-          This page states the Terms and Conditions under which you, as a Visitor, may visit this website (<strong>"Website"</strong>). Please read this page carefully. If you do not accept the Terms and Conditions stated here, we request you to exit this site. 
+          This page states the Terms and Conditions under which you, as a Visitor, may visit this website (<strong>&quot;Website&quot;</strong>). Please read this page carefully. If you do not accept the Terms and Conditions stated here, we request you to exit this site. 
           The company, its divisions, subsidiaries, associate companies, or any other related entities reserve the right to revise these Terms and Conditions at any time by updating this posting. You should visit this page periodically to re-appraise yourself, as these Terms and Conditions are binding on all users of this Website.
         </p>
 
         <h2 className="text-2xl font-bold mt-8 mb-2">Use of Content</h2>
         <p className="mb-2 font-extralight text-sm">
           All logos, brands, marks, headings, labels, names, signatures, numerals, shapes, or any combination thereof appearing on this site, except as otherwise noted, are properties either owned or used under license by the company or its associate entities. The use of these properties, except as provided in the Terms, is strictly prohibited. 
-          You may not modify, sell, reproduce, display, distribute, or otherwise use the content for any public or commercial purposes without the organization's written permission.
+          You may not modify, sell, reproduce, display, distribute, or otherwise use the content for any public or commercial purposes without the organization&apos;s written permission.
         </p>
 
         <h2 className="text-2xl font-bold mt-8 mb-2">Acceptable Website Use</h2>

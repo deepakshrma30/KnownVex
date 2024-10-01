@@ -326,21 +326,21 @@ export const FEATURES = [
     title: "Online Billing, Invoicing, & Contracts",
     description:
       "Simple and secure control of your organization's financial and legal transactions. Send customized invoices and contracts.",
-    icon: <FileText className="text-white w-6 h-6" />,
-    bgColor: "bg-blue-500",
+    icon: <FileText className="text-purple-500 w-6 h-6" />,
+    // bgColor: "bg-blue-500",
   },
   {
     title: "Easy Scheduling & Attendance Tracking",
     description:
       "Schedule and reserve classrooms at one campus or multiple campuses. Keep detailed records of student attendance.",
-    icon: <Calendar className="text-white w-6 h-6" />,
-    bgColor: "bg-orange-500",
+    icon: <Calendar className="text-purple-600 w-6 h-6" />,
+    // bgColor: "bg-orange-500",
   },
   {
     title: "Customer Tracking",
     description:
       "Simple and secure control of your organization's financial and legal transactions. Send customized invoices and contracts.",
-    icon: <Users className="text-white w-6 h-6" />,
-    bgColor: "bg-cyan-500",
+    icon: <Users className="text-purple-700 w-6 h-6" />,
+    // bgColor: "bg-cyan-500",
   },
 ]

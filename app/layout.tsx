@@ -7,6 +7,7 @@ import Footer from "@/components/footer";
 import { ThemeProvider } from "@/components/theme-provider";
 import { CounterStoreProvider } from "@/provider/counterProvider";
 import AuthModal from "@/components/authModal";
+import ProviderQuery from "@/provider/queryClient";
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
@@ -36,13 +37,15 @@ export default function RootLayout({
           // enableSystem
           disableTransitionOnChange
         > */}
-        <CounterStoreProvider>
-          <AppBar />
+        <ProviderQuery>
+          <CounterStoreProvider>
+            <AppBar />
 
-          {children}
-          <AuthModal />
-          <Footer />
-        </CounterStoreProvider>
+            {children}
+            <AuthModal />
+            <Footer />
+          </CounterStoreProvider>
+        </ProviderQuery>
         {/* </ThemeProvider> */}
       </body>
     </html>

@@ -61,7 +61,7 @@ const Footer = () => {
               </span>
               <ul className="text-sm font-light list-disc pl-4">
                 {section.links.map((link, linkIndex) => (
-                  <Link href={link.link}>
+                  <Link key={index} href={link.link}>
                   <li
                     key={linkIndex}
                     className="hover:underline cursor-pointer"

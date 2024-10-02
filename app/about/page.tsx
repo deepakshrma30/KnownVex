@@ -23,7 +23,7 @@ const About = () => {
               Unlocking Potential, Building Skills: Your Journey To Success
             </h2>
             <p className="text-sm md:text-base text-gray-700">
-              Knownvex is an edtech platform that helps students with
+              Knowvex is an edtech platform that helps students with
               internships, professional training programs, career guidance, and
               mentorship. Our aim is to bridge the gap between formal education
               and the ever changing requirements of the industry. We at Knowvex
@@ -59,7 +59,7 @@ const About = () => {
           <div className="md:w-1/2 md:pl-8">
             <h2 className="text-3xl sm:text-4xl font-bold mb-4">OUR MISSION</h2>
             <p className="text-sm sm:text-base leading-relaxed">
-              At Knownvex, We Believe Everyone Should Have The Opportunity To
+              At Knowvex, We Believe Everyone Should Have The Opportunity To
               Create Progress Through Technology And Develop The Skills Of
               Tomorrow. With Assessments, Learning Paths And Courses Authored By
               Industry Experts, Our Platform Helps Individuals Benchmark

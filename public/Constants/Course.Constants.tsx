@@ -266,9 +266,10 @@ export const COURSE_CONTANTS: any = {
 
 export const PRICING_PLAN = [
   {
-    title: "Basic",
-    description: "For individuals and small teams",
-    price: "$9",
+    title: "Self",
+    description: "For Self",
+    price: "10,000",
+    originalPrice:"5,000",
     recommended:false,
     features: [
       { name: "Up to 5 projects", included: true },
@@ -281,9 +282,10 @@ export const PRICING_PLAN = [
     ],
   },
   {
-    title: "Pro",
-    description: "For growing businesses",
-    price: "$29",
+    title: "Professional",
+    description: "For working Professional",
+    price: "16,000",
+    originalPrice:"8,000",
     recommended:true,
     features: [
       { name: "Unlimited projects", included: true },
@@ -296,9 +298,10 @@ export const PRICING_PLAN = [
     ],
   },
   {
-    title: "Enterprise",
-    description: "For large organizations",
-    price: "$99",
+    title: "Mentor",
+    description: "For Mentorship",
+    price: "12,000",
+    originalPrice:"6,000",
     recommended:false,
     features: [
       { name: "Unlimited projects", included: true },

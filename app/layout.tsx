@@ -8,13 +8,15 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { CounterStoreProvider } from "@/provider/counterProvider";
 import AuthModal from "@/components/authModal";
 import ProviderQuery from "@/provider/queryClient";
+import { Toaster } from "@/components/ui/sonner";
+import InputOTPModal from "@/components/inputOtpModal";
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
 });
 
 export const metadata: Metadata = {
-  title: "KnownVex",
+  title: "Knowvex",
   description: "Course Selling Website",
 };
 
@@ -24,7 +26,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en">
       <body
         className={cn(
           "min-h-[100dvh] grid grid-rows-[auto_1fr_auto] bg-gradient-to-r  from-blue-50 to-pink-50  font-sans antialiased",
@@ -42,7 +44,9 @@ export default function RootLayout({
             <AppBar />
 
             {children}
+            <Toaster/>
             <AuthModal />
+            <InputOTPModal/>
             <Footer />
           </CounterStoreProvider>
         </ProviderQuery>

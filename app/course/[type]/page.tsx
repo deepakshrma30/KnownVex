@@ -309,6 +309,7 @@ const CoursePage = ({ params }: { params: { type: string } }) => {
                 price={plan.price}
                 features={plan.features}
                 recommended={plan.recommended}
+                originalPrice={plan.originalPrice}
               />
             ))}
           </div>

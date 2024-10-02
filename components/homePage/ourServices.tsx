@@ -5,7 +5,7 @@ const OurServices = () => {
   return (
     <Reveal>
       <section className="container">
-    <h1>e</h1>
+    {/* <h1>e</h1> */}
       </section>
     </Reveal>
   );

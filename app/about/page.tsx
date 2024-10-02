@@ -23,10 +23,10 @@ const About = () => {
               Unlocking Potential, Building Skills: Your Journey To Success
             </h2>
             <p className="text-sm md:text-base text-gray-700">
-              Knownvex is an edtech platform that helps students with
+              Knowvex is an edtech platform that helps students with
               internships, professional training programs, career guidance, and
               mentorship. Our aim is to bridge the gap between formal education
-              and the ever changing requirements of the industry. We at Corizo
+              and the ever changing requirements of the industry. We at Knowvex
               bring together the students aiming for successful careers,
               knowledge and experience accumulated over the years by our
               industry experts to create a holistic learning platform. Our
@@ -59,7 +59,7 @@ const About = () => {
           <div className="md:w-1/2 md:pl-8">
             <h2 className="text-3xl sm:text-4xl font-bold mb-4">OUR MISSION</h2>
             <p className="text-sm sm:text-base leading-relaxed">
-              At Knownvex, We Believe Everyone Should Have The Opportunity To
+              At Knowvex, We Believe Everyone Should Have The Opportunity To
               Create Progress Through Technology And Develop The Skills Of
               Tomorrow. With Assessments, Learning Paths And Courses Authored By
               Industry Experts, Our Platform Helps Individuals Benchmark
@@ -78,10 +78,10 @@ const About = () => {
 
       <section className="container mt-4 py-12 px-4 sm:px-6 lg:px-8 ">
         <div className="text-center mb-12">
-          {/* <h2 className="text-lg font-semibold text-purple-600 mb-2">
-              ABOUT THE COURSES
-            </h2> */}
-          <h1 className="text-4xl font-bold">WHY LEARN FROM KNOWVEX?</h1>
+          <h2 className="text-lg font-semibold text-purple-600 mb-2">
+            GREAT TEAM MEMBERS
+            </h2>
+          <h1 className="text-4xl font-bold">We Have Expert Team</h1>
         </div>
         <Carousel
           opts={{

@@ -221,7 +221,7 @@ const ContactUs = () => {
           </motion.div>
           <motion.div className="lg:pl-8" initial={{ opacity: 0, x: 100 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1, type: "spring", stiffness: 100, delay: 1 }}>
+            transition={{ duration: 1, type: "spring", stiffness: 100}}>
             <h2 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6 text-purple-700">
               Get in touch
             </h2>

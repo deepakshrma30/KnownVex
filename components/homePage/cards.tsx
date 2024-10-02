@@ -8,28 +8,32 @@ import ThreeDCard from "../animation/ThreeDCard";
 
 const cardData = [
   {
-    icon: <Home />,
+    icon: <img src="/images/web-icon.svg" className="w-6"/>,
     title: "Web Development",
+    path: "/course/web",
     description:
-      "Web development is the work involved in developing a website for the Internet or an intranet. Web development can range from developing a simple single static page of plain text to complex web applications, electronic businesses, and social network services.",
+      "Web development involves building and maintaining websites and web applications. This course covers front-end and back-end development, using technologies like HTML, CSS, JavaScript, and frameworks such as React and Node.js to create responsive and dynamic web experiences.",
   },
   {
     icon: <TabletSmartphone />,
     title: "Android Development",
+    path: "/course/android",
     description:
-      "Web development is the work involved in developing a website for the Internet or an intranet. Web development can range from developing a simple single static page of plain text to complex web applications, electronic businesses, and social network services.",
+      "Android Development focuses on creating applications for Android devices using programming languages like Java and Kotlin. This course covers the fundamentals of Android Studio, UI/UX design, API integration, and deploying apps on the Google Play Store.",
   },
   {
-    icon: <Bot />,
-    title: "Machine Learning",
+    icon: <img src="/images/ai-icon.svg" className="w-6"/>,
+    title: "Artificial Intelligence",
+    path: "/course/ai",
     description:
-      "Web development is the work involved in developing a website for the Internet or an intranet. Web development can range from developing a simple single static page of plain text to complex web applications, electronic businesses, and social network services.",
+      "Artificial Intelligence (AI) is the study of creating intelligent agents that can perform tasks that typically require human intelligence. This course includes topics such as machine learning, deep learning, natural language processing, and computer vision, providing practical insights into building AI-driven solutions.",
   },
   {
     icon: <Home />,
-    title: "Marketing",
+    title: "Human Resources",
+    path: "/course/hr",
     description:
-      "Web development is the work involved in developing a website for the Internet or an intranet. Web development can range from developing a simple single static page of plain text to complex web applications, electronic businesses, and social network services.",
+      "Human Resources (HR) focuses on managing people within organizations, including recruitment, training, performance management, and employee relations. This course provides an understanding of HR practices, compliance, and strategies to foster a productive and positive workplace environment.",
   },
 ];
 
@@ -68,7 +72,7 @@ const Cards = () => {
           <Reveal>
             <div className="flex flex-wrap justify-center gap-6">
               {cardData?.map((item, index) => (
-                <ThreeDCard key={index} index={index} icon={item?.icon} title={item?.title} description={item?.description}/>
+                <ThreeDCard key={index} index={index} icon={item?.icon} title={item?.title} description={item?.description} path={item?.path}/>
               ))}
             </div>
           </Reveal>

@@ -68,7 +68,7 @@ export default function ArcCarousel() {
             ))}
           </div>
 
-          <div className="absolute left-1/2 transform -translate-x-1/2 top-60">
+          <div className="absolute left-1/2 transform -translate-x-1/2 top-72">
             <Button size={"lg"} >Let&apos;s Start </Button>
           </div>
         </div>

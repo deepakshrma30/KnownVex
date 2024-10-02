@@ -10,20 +10,20 @@ import { MessageCircleQuestion } from "lucide-react";
 
 const data = [
   {
-    question: "Question1",
+    question: "Who is going to function as my mentor?",
     answer:
-      "Knowvex is an Innovative Coach Platform designed to assist Students with Internships, Professional training Programs, Career guidance, and mentorship. Our Aim is to bridge the gap between Education and Employment, providing Students with the resources and support they need to Succeed in their Careers.",
+      "You receive mentoring from professionals in the field who are well-versed in their particular field and have worked in the sector for a considerable amount of time. Throughout your upskilling journey, the method is designed to give concept-clear teaching and useful, hands-on learning.",
   },
   {
-    question: "Question2",
+    question: "Is it possible to use my program with easy monthly installments?",
     answer:
-      "Knowvex is an Innovative Coach Platform designed to assist Students with Internships, Professional training Programs, Career guidance, and mentorship. Our Aim is to bridge the gap between Education and Employment, providing Students with the resources and support they need to Succeed in their Careers.",
+      "If you meet the basic eligibility requirements, you can simply obtain the same using Free EMI as a means of payment.",
   },
   {
-    question: "Question3",
+    question: "Which payment methods are accepted?",
     answer:
-      "Knowvex is an Innovative Coach Platform designed to assist Students with Internships, Professional training Programs, Career guidance, and mentorship. Our Aim is to bridge the gap between Education and Employment, providing Students with the resources and support they need to Succeed in their Careers.",
-  },
+      "Any of the following payment methods are accepted: UPI, debit/credit cards, Netbanking, and mobile banking."
+    },
 ];
 
 const Accordian = () => {

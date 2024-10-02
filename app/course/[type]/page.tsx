@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Image from "next/image";
-import React from "react";
+import React, { useRef, useState } from "react";
 
 import {
   Card,
@@ -13,179 +13,64 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Calendar, FileText, Users } from "lucide-react";
+
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from "@/components/ui/accordion";
+
 import Reveal from "@/components/animation/reveal";
 import PricingPlanCard from "@/components/PricingPlan";
+import {
+  COURSE_CONTANTS,
+  FEATURES,
+  PRICING_PLAN,
+  SERVICES,
+} from "@/public/Constants/Course.Constants";
 
-const words = [
-  {
-    text: "Web",
-    className: "text-purple-500",
-  },
-  {
-    text: "Development",
-    className: "text-purple-500",
-  },
-];
+const CoursePage = ({ params }: { params: { type: string } }) => {
+  const [selectedProgram, setSelectedProgram] = useState<string>();
 
-const tabs = [
-  {
-    id: "tab1",
-    heading: "Overview",
-    content:
-      "hgfhfhhfhjgfhghgfhgfhgfhgkjgkfdgjklhjklsdfgghlkjdsfglkdsfklhgjlhjlkfgdhdsgheiroyhiertghndfghk",
-    description: "dfgfdg",
-  },
-  {
-    id: "tab2",
-    heading: "Content",
-    content:
-      "hgfhfhhfhjgfhghgfhgfhgfhgkjgkfdgjklhjklsdfgghlkjdsfglkdsfklhgjlhjlkfgdhdsgheiroyhiertghndfghk",
-    description: "dfgfdg",
-  },
-  {
-    id: "tab3",
-    heading: "Details",
-    content:
-      "hgfhfhhfhjgfhghgfhgfhgfhgkjgkfdgjklhjklsdfgghlkjdsfglkdsfklhgjlhjlkfgdhdsgheiroyhiertghndfghk",
-    description: "dfgfdg",
-  },
-];
+  const { type } = params;
 
-const features = [
-  {
-    title: "Online Billing, Invoicing, & Contracts",
-    description:
-      "Simple and secure control of your organization's financial and legal transactions. Send customized invoices and contracts.",
-    icon: <FileText className="text-white w-6 h-6" />,
-    bgColor: "bg-blue-500",
-  },
-  {
-    title: "Easy Scheduling & Attendance Tracking",
-    description:
-      "Schedule and reserve classrooms at one campus or multiple campuses. Keep detailed records of student attendance.",
-    icon: <Calendar className="text-white w-6 h-6" />,
-    bgColor: "bg-orange-500",
-  },
-  {
-    title: "Customer Tracking",
-    description:
-      "Simple and secure control of your organization's financial and legal transactions. Send customized invoices and contracts.",
-    icon: <Users className="text-white w-6 h-6" />,
-    bgColor: "bg-cyan-500",
-  },
-];
+  const data = COURSE_CONTANTS[type];
 
-const highlights = [
-  "heelo",
-  "very good",
-  "super doopercull",
-  "awesomesauce",
-  "fantabulous",
-  "amaze-balls",
-  "wonderiffic",
-  "splendiferous",
-  "marvytastic",
-  "coolio",
-  "epicness",
-  "neat-o",
-  "radicalicious",
-  "heelo",
-  "very good",
-  "super doopercull",
-  "awesomesauce",
-  "fantabulous",
-  "amaze-balls",
-  "wonderiffic",
-  "splendiferous",
-  "marvytastic",
-  "coolio",
-  "epicness",
-  "neat-o",
-  "radicalicious",
-];
+  const pricingSectionRef = useRef<HTMLDivElement>(null);
 
-const services = [
-  { label: "SOFT SKILL", src: "/images/soft.png" },
-  { label: "Mock Interviews", src: "/images/mock.png" },
-  { label: "Portfolio Building", src: "/images/porfolio.png" },
-  { label: "Resume Building", src: "/images/cv.png" },
-  { label: "Mock Tests", src: "/images/mtest.png" },
-  { label: "Interview", src: "/images/interview.png" },
-];
+  const scrollToPricing = () => {
+    if (pricingSectionRef.current) {
+      pricingSectionRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
-const pricingPlans = [
-  {
-    title: "Basic",
-    description: "For individuals and small teams",
-    price: "$9",
-    recommended:false,
-    features: [
-      { name: "Up to 5 projects", included: true },
-      { name: "Up to 10 users", included: true },
-      { name: "Basic analytics", included: true },
-      { name: "24/7 support", included: true },
-      { name: "Custom integrations", included: false },
-      { name: "Dedicated account manager", included: false },
-      { name: "AI-powered insights", included: false },
-    ],
-  },
-  {
-    title: "Pro",
-    description: "For growing businesses",
-    price: "$29",
-    recommended:true,
-    features: [
-      { name: "Unlimited projects", included: true },
-      { name: "Up to 50 users", included: true },
-      { name: "Advanced analytics", included: true },
-      { name: "Priority support", included: true },
-      { name: "Custom integrations", included: true },
-      { name: "Dedicated account manager", included: false },
-      { name: "AI-powered insights", included: false },
-    ],
-  },
-  {
-    title: "Enterprise",
-    description: "For large organizations",
-    price: "$99",
-    recommended:false,
-    features: [
-      { name: "Unlimited projects", included: true },
-      { name: "Unlimited users", included: true },
-      { name: "Advanced analytics", included: true },
-      { name: "24/7 premium support", included: true },
-      { name: "Custom integrations", included: true },
-      { name: "Dedicated account manager", included: true },
-      { name: "AI-powered insights", included: true },
-    ],
-  },
-];
-
-const page = () => {
   return (
     <>
       <section className="flex container mt-4  flex-col md:flex-row items-center justify-between">
         {/* left section  */}
         <div className="text-center md:text-left  md:w-1/2 space-y-6">
-          <TypewriterEffectSmooth words={words} />
+          <TypewriterEffectSmooth words={data.words} />
           {/* Elevate Your Skills with Innovative Web Development Training */}
 
           <h2 className="text-2xl font-semibold">
             Ready To Kickstart Your Journey In{" "}
-            <span className="text-purple-500">Web Development</span> With Us?
+            <span className={data.words[0].className}>
+              {" "}
+              {data.words.map((word: any) => word.text)?.join(" ")}{" "}
+            </span>{" "}
+            With Us?
           </h2>
-          <p className="text-xl">
-            We Can&apos;t Wait To Explore Creativity And Build Amazing Websites
-            Together!
-          </p>
-          <Button className="mt-4 rounded-full">Start Course Now</Button>
+          <p className="text-xl">{data.description}</p>
+          <Button className="mt-4 rounded-full" onClick={scrollToPricing}>
+            Start Course Now
+          </Button>
         </div>
 
         {/* right section  */}
         <div className="hidden md:flex md:w-1/2 justify-center">
           <img
-            src={"/images/course-img.svg"}
+            src={data.headerImgUrl}
             className="w-[650px] h-[500px] "
             alt="course-image"
           />
@@ -227,7 +112,7 @@ const page = () => {
         <section className="container p-4  mt-4 relative">
           <Tabs defaultValue="tab1">
             <TabsList className="grid grid-cols-3  w-full  bg-slate-950 text-white">
-              {tabs.map((tab) => (
+              {data.tabs.map((tab: any) => (
                 <TabsTrigger
                   key={tab.id}
                   value={tab.id}
@@ -237,7 +122,7 @@ const page = () => {
                 </TabsTrigger>
               ))}
             </TabsList>
-            {tabs.map((tab) => (
+            {data.tabs.map((tab: any) => (
               <TabsContent key={tab.id} value={tab.id}>
                 <Card>
                   <motion.div
@@ -273,7 +158,7 @@ const page = () => {
         <Reveal>
           <div className="flex justify-center">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-10  mt-8">
-              {features.map((feature, index) => (
+              {FEATURES.map((feature: any, index: number) => (
                 <Card
                   key={index}
                   className="bg-white max-w-[350px] min-h-full p-4 flex flex-col items-center justify-evenly  shadow-lg rounded-lg relative hover:cursor-pointer"
@@ -300,30 +185,73 @@ const page = () => {
         </Reveal>
       </section>
 
-      <section className="container mt-8 p-4">
-        <div className="text-center">
-          <h3 className="scroll-m-20 text-2xl font-extrabold tracking-tight lg:text-4xl">
-            Key Highlights of our{" "}
-            <span className="text-purple-500">Web Development</span> program
-          </h3>
-        </div>
-
-        <div className="w-full max-w-4xl mx-auto p-6 ">
-          <div className="flex flex-wrap justify-center gap-3">
-            {highlights.map((highlight, index) => (
-              <motion.div
-                whileHover={{ scale: 1.1, backgroundColor: "black", y: -1 }}
-                transition={{ duration: 0.3, ease: "linear" }}
-                key={index}
-                className="bg-purple-500 text-white px-4 py-2 rounded-full text-sm font-medium cursor-pointer  hover:text-white"
-              >
-                {highlight}
-              </motion.div>
-            ))}
+      <Reveal>
+        <section className="container mt-8 p-4">
+          <div className="text-center">
+            <h3 className="scroll-m-20 text-2xl font-extrabold tracking-tight lg:text-4xl">
+              Key Highlights of our{" "}
+              <span className="text-purple-500">
+                {data.words.map((word: any) => word.text)?.join(" ")}
+              </span>{" "}
+              program
+            </h3>
           </div>
-        </div>
-      </section>
 
+          <div className="w-full max-w-4xl mx-auto p-6 ">
+            <div className="flex flex-wrap justify-center gap-3">
+              {data.highlights.map((highlight: string, index: number) => (
+                <motion.div
+                  whileHover={{ scale: 1.1, backgroundColor: "black", y: -1 }}
+                  transition={{ duration: 0.3, ease: "linear" }}
+                  key={index}
+                  className="bg-purple-500 text-white px-4 py-2 rounded-full text-sm font-medium cursor-pointer  hover:text-white"
+                >
+                  {highlight}
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+      </Reveal>
+
+      <Reveal>
+        <section className="container mt-8 p-4">
+          <h3 className="scroll-m-20 text-center text-2xl font-extrabold tracking-tight lg:text-4xl">
+            Program Curriculum
+          </h3>
+          <Accordion type="single" collapsible className="flex flex-col mt-4">
+            {data?.programCurriculums?.map((item: any, index: any) => (
+              <div
+                key={index}
+                className="rounded-md bg-white text-black pl-4 pr-4"
+              >
+                <AccordionItem
+                  key={index}
+                  value={item?.program}
+                  onClick={() => {
+                    setSelectedProgram(item?.program);
+                  }}
+                >
+                  <AccordionTrigger
+                    className={`${
+                      selectedProgram === item?.program ? "text-purple-600" : ""
+                    }`}
+                  >
+                    {item?.program}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-left font-normal break-words max-w-[800px] overflow-hidden  overflow-y-auto pl-8">
+                    <ul className="list-disc">
+                      {item?.subProgram.map((item: any) => (
+                        <li key={item + Math.random()}>{item}</li>
+                      ))}
+                    </ul>
+                  </AccordionContent>
+                </AccordionItem>
+              </div>
+            ))}
+          </Accordion>
+        </section>
+      </Reveal>
       <Reveal>
         <section className="container mt-8 p-4">
           <div className="flex flex-col lg:flex-row items-center justify-evenly   px-4 lg:px-16 py-8">
@@ -343,7 +271,7 @@ const page = () => {
             <div className="relative w-full lg:max-w-xl">
               <div className="absolute inset-0 h-1/2 top-20 w-full bg-purple-200 rounded-lg -z-10" />
               <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
-                {services?.map((item, index) => (
+                {SERVICES?.map((item, index) => (
                   <div
                     key={index}
                     className="flex flex-col items-center space-y-1 justify-center bg-white shadow-md rounded-lg p-4"
@@ -365,27 +293,30 @@ const page = () => {
 
       {/* pricing plan  */}
       <Reveal>
-
-      <section className="container mx-auto py-12 px-4">
-        <h3 className="scroll-m-20 text-center text-2xl font-extrabold tracking-tight lg:text-4xl">
-          Choose Your Plan
-        </h3>
-        <div className="grid gap-8 justify-center items-center grid-cols-3 mt-4">
-          {pricingPlans.map((plan) => (
-            <PricingPlanCard
-              key={plan.title}
-              title={plan.title}
-              description={plan.description}
-              price={plan.price}
-              features={plan.features}
-              recommended={plan.recommended}
-            />
-          ))}
-        </div>
-      </section>
+        <section
+          className="container mx-auto py-12 px-4"
+          ref={pricingSectionRef}
+        >
+          <h3 className="scroll-m-20 text-center text-2xl font-extrabold tracking-tight lg:text-4xl">
+            Choose Your Plan
+          </h3>
+          <div className="grid gap-8 justify-center items-center grid-cols-3 mt-4">
+            {PRICING_PLAN.map((plan) => (
+              <PricingPlanCard
+                key={plan.title}
+                title={plan.title}
+                description={plan.description}
+                price={plan.price}
+                features={plan.features}
+                recommended={plan.recommended}
+                originalPrice={plan.originalPrice}
+              />
+            ))}
+          </div>
+        </section>
       </Reveal>
     </>
   );
 };
 
-export default page;
+export default CoursePage;

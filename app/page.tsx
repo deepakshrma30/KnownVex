@@ -4,6 +4,7 @@ import Banner from "@/components/homePage/banner";
 import Cards from "@/components/homePage/cards";
 import HeroSection from "@/components/homePage/heroSection";
 import Partners from "@/components/homePage/partners";
+import OurServices from "@/components/homePage/ourServices";
 
 export default function Home() {
   
@@ -15,6 +16,7 @@ export default function Home() {
       <Banner/>
       <Partners/>
       <Accordian/>
+      <OurServices />
     </main>
   );
 }

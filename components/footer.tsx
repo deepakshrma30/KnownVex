@@ -1,36 +1,33 @@
 import React from "react";
 
 import { Button } from "./ui/button";
+import Link from "next/link";
 
 const footerSections = [
   {
-    heading: "Resources",
+    heading: "Links",
     links: [
-      { name: "Academy" },
-      { name: "Blog" },
-      { name: "Guides" },
-      { name: "Tutorials" },
-      { name: "Support" },
+      { name: "Home" , link:"/" },
+      { name: "About Us", link: "/about" },
+      { name: "Contact Us",link: "/contact" },
     ],
   },
   {
-    heading: "Company",
+    heading: "Our Programs",
     links: [
-      { name: "About Us" },
-      { name: "Careers" },
-      { name: "Press" },
-      { name: "Partners" },
-      { name: "Contact" },
+      { name: "Web Development",link : "/course/web" },
+      { name: "Artifical Inteligence",link : "/course/ai" },
+      { name: "Devops",link : "/course/devops" },
+      { name: "Finance",link : "/course/finance" },
     ],
   },
   {
     heading: "Legal",
     links: [
-      { name: "Privacy Policy" },
-      { name: "Terms of Service" },
-      { name: "Cookie Policy" },
-      { name: "Accessibility" },
-      { name: "Security" },
+      { name: "Privacy Policy",link : "/privacy-policy" },
+      { name: "Terms & Conditions",link: "/terms-conditions" },
+      { name: "Payment & Refunds", link:"/payment-refund" },
+      { name: "FAQ's" ,link : "/contact"}
     ],
   },
 ];
@@ -46,8 +43,12 @@ const Footer = () => {
           Start Your Journey to Career Excellence Here
         </span>
         <div className="flex gap-4">
+          <Link href={"/"}>
           <Button>Get Started</Button>
-          <Button variant={"secondary"}>Contact Us</Button>
+          </Link>
+          <Link href="/contact">
+            <Button variant={"secondary"}>Contact Us</Button>
+          </Link>
         </div>
       </div>
 
@@ -58,14 +59,16 @@ const Footer = () => {
               <span className="text-xl font-extrabold mb-1 inline-block">
                 {section.heading}
               </span>
-              <ul className="text-sm font-light">
+              <ul className="text-sm font-light list-disc pl-4">
                 {section.links.map((link, linkIndex) => (
+                  <Link key={index} href={link.link}>
                   <li
                     key={linkIndex}
-                    className="hover:font-bold cursor-pointer"
+                    className="hover:underline cursor-pointer"
                   >
                     {link.name}
                   </li>
+                  </Link>
                 ))}
               </ul>
             </div>
@@ -76,18 +79,18 @@ const Footer = () => {
           <div className="flex gap-4 mb-3">
             <img
               className="w-8 transition-transform duration-150 cursor-pointer hover:-translate-y-2"
-              src="./images/twitter.svg"
+              src="/images/twitter.svg"
               alt="Twitter"
             />
 
             <img
               className="w-8 transition-transform duration-150 cursor-pointer hover:-translate-y-2"
-              src="./images/linkedin.svg"
+              src="/images/linkedin.svg"
               alt="LinkedIn"
             />
             <img
               className="w-8 transition-transform duration-150 cursor-pointer hover:-translate-y-2"
-              src="./images/facebook.svg"
+              src="/images/facebook.svg"
               alt="Facebook"
             />
           </div>
@@ -103,7 +106,7 @@ const Footer = () => {
             <span>100% Safe and secure Payments with</span>
             <img
               className="p-1 bg-white"
-              src="./images/razerPay.svg"
+              src="/images/razerPay.svg"
               alt="RazerPay"
             />
           </div>

@@ -22,14 +22,46 @@ export const signUpUser = async (formData: SignUpFormData) => {
 export const verifyOtp = async ({
   value,
   email,
+  flag
 }: {
-  value: number;
+  value: string;
   email: string;
+  flag:boolean
 }) => {
   const response = await axiosInstance.get("/otp/verify", {
     params: {
       otp: value,
       email: email,
+      isLogin:flag
     },
   });
+  return response.data
 };
+
+export const OtpResend = async ({
+  
+  email,
+  
+}: {
+  
+  email: string;
+  
+}) => {
+  const response = await axiosInstance.get("/otp/resend", {
+    params: {
+      
+      email: email,
+      
+    },
+  });
+  return response.data
+};
+
+export const login=async({email,password}:{email:string;password:string})=>{
+  let body={
+    email:email,
+    password:password
+  }
+  const response=await axiosInstance.post("/login",body)
+  return response.data
+}

@@ -34,6 +34,12 @@ export const createUserSlice: StateCreator<
         phoneNumber:get().phoneNumber,
         role:get().role
       }),
+      setEmail:(email:string)=>set((state)=>{
+        state.email=email
+      }),
+      setActive:(flag:boolean)=>set((state)=>{
+        state.active=flag
+      }),
     reset:()=>{
         set(initialState)
     }

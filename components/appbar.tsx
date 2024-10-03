@@ -27,9 +27,10 @@ import { createUserSlice } from "@/lib/userSlice";
 const AppBar = () => {
   const { setTheme } = useTheme();
   const { handleLogin, open } = useCounterStore((state) => state);
-  const { name } = useStore(
+  const { name,active } = useStore(
     useShallow((state) => ({
       name: state.name,
+      active:state.active
     }))
   );
 
@@ -98,12 +99,12 @@ const AppBar = () => {
         </div>
 
         <div className="flex items-center space-x-4">
-          {name ? (
+          {active ? (
             <Popover>
               <PopoverTrigger asChild>
                 <Avatar className="cursor-pointer">
                   {/* <AvatarImage src="/placeholder.svg?height=32&width=32" alt={name} /> */}
-                  <AvatarFallback>{name.charAt(0).toUpperCase()}</AvatarFallback>
+                  <AvatarFallback>{name?.charAt(0).toUpperCase()}</AvatarFallback>
                 </Avatar>
               </PopoverTrigger>
               <PopoverContent className="w-36">

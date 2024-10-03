@@ -44,7 +44,7 @@ export default function RootLayout({
             <AppBar />
 
             {children}
-            <Toaster/>
+            <Toaster richColors/>
             <AuthModal />
             <InputOTPModal/>
             <Footer />

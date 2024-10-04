@@ -65,3 +65,8 @@ export const login=async({email,password}:{email:string;password:string})=>{
   const response=await axiosInstance.post("/login",body)
   return response.data
 }
+
+export const getCartItems=async()=>{
+  const response=await axiosInstance.get("/cart/all");
+  return response?.data
+}

@@ -1,6 +1,6 @@
 import { UserActions, userInfo } from "@/types/types";
 import { StateCreator } from "zustand";
-import { persist, createJSONStorage } from "zustand/middleware";
+
 
 export const initialState: userInfo = {
     id:"",

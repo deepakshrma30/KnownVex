@@ -35,3 +35,20 @@ export type SignUpFormData = {
     createdAt: string; // ISO 8601 date string
     updatedAt: string; // ISO 8601 date string
   }
+
+  export  interface CartItems{
+    id:string;
+    product:string;
+    plan:string;
+
+  }
+
+  export type addCartProps={
+    product:string;
+    plan:string
+  }
+  export interface CartActions{
+    addCart:(cartItem:addCartProps)=>void;
+    getCart:()=>void;
+    deleteCart:(id:string)=>void
+  }

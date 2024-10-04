@@ -23,9 +23,11 @@ import { useStore } from "@/lib/store";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { createUserSlice } from "@/lib/userSlice";
+import { useRouter } from "next/navigation";
 
 const AppBar = () => {
   const { setTheme } = useTheme();
+  const router = useRouter()
   const { handleLogin, open } = useCounterStore((state) => state);
   const { name,active } = useStore(
     useShallow((state) => ({
@@ -112,7 +114,7 @@ const AppBar = () => {
                   <div className="font-medium text-center">{name}</div>
                   <div className="grid gap-2">
                     <Button variant="ghost" className="w-full justify-start" asChild>
-                      <Link href="/profile">
+                      <Link href="/cart">
                         <ShoppingBasketIcon className="mr-2 h-4 w-4" />
                         
                         Cart
@@ -124,7 +126,7 @@ const AppBar = () => {
                         Settings
                       </Link>
                     </Button> */}
-                    <Button variant="ghost" className="w-full justify-start">
+                    <Button variant="ghost" className="w-full justify-start outline-none">
                       <LogOut className="mr-2 h-4 w-4" />
                       Logout
                     </Button>

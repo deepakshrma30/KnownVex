@@ -98,6 +98,12 @@ const AppBar = () => {
           >
             Contact Us
           </Link>
+          <Link
+            href="/adminData"
+            className="text-sm font-medium hover:text-primary text-muted-foreground"
+          >
+            Admin Data
+          </Link>
         </div>
 
         <div className="flex items-center space-x-4">

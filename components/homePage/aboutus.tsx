@@ -1,5 +1,5 @@
 
-import {Users } from "lucide-react";
+import {Phone, Users } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 import { Button } from "../ui/button";
@@ -36,10 +36,9 @@ const Aboutus = () => {
             Employment, providing Students with the resources and support they
             need to Succeed in their Careers.
           </p>
-          <div className="mt-2 flex items-center space-x-4">
-            <Link href="/contact">
-              <Button>Contact Us</Button>
-            </Link>
+          <div className="mt-2 flex items-center space-x-4 p-2 w-fit rounded-md shadow-lg font-bold">
+            <Phone fill="true" />
+            <span>Call Us: 12345-67890</span>
           </div>
         </div>
       </div>

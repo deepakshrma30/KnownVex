@@ -73,7 +73,7 @@ const AnimateText = ({
         aria-hidden
       >
         {textArray.map((line, lineIndex) => (
-          <span className="block bg-[#87CEEB]" key={`${line}-${lineIndex}`}>
+          <span className="block bg-[#7af9fa]" key={`${line}-${lineIndex}`}>
             {line.split(" ").map((word, wordIndex) => (
               <span className="inline-block " key={`${word}-${wordIndex}`}>
                 {word.split("").map((char, charIndex) => (

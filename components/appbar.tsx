@@ -25,6 +25,84 @@ import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { createUserSlice } from "@/lib/userSlice";
 import { useRouter } from "next/navigation";
 
+const NAV_ITEMS = [
+  {
+    label: "Knowvex",
+    href: "/",
+    className: "text-primary font-black",
+    type: "link",
+  },
+  {
+    label: "Courses",
+    type: "dropdown",
+    subItems: [
+      {
+        label: "Computer Science",
+        type: "submenu",
+        subItems: [
+          { label: "Machine Learning", href: "/course/ml" },
+          { label: "Artificial Intelligence", href: "/course/ai" },
+          { label: "Data Science", href: "/course/dataScience" },
+          { label: "Web Development", href: "/course/web" },
+          { label: "Cyber Security", href: "/course/cyber" },
+        ],
+      },
+      {
+        label: "ECE",
+        type: "submenu",
+        subItems: [
+          { label: "IoT & Robotics", href: "/course/iot" }, // Changed "IOT" to "IoT" for consistency.
+          { label: "Cloud Computing", href: "/course/cloudComputing" },
+        ],
+      },
+      {
+        label: "MEC",
+        type: "submenu",
+        subItems: [
+          { label: "Hybrid & Electric Vehicles", href: "/course/vehicle" },
+          { label: "AutoCAD", href: "/course/cad" }, // Corrected "Auto cod" to "AutoCAD".
+        ],
+      },
+      {
+        label: "Management",
+        type: "submenu",
+        subItems: [
+          { label: "Digital Marketing", href: "/course/marketing" },
+          { label: "Finance", href: "/course/finance" },
+          { label: "Human Resource", href: "/course/hr" },
+        ],
+      },
+      {
+        label: "Programming Language",
+        type: "submenu",
+        subItems: [
+          { label: "C & C++", href: "/course/c++" },
+          { label: "Python", href: "/course/python" },
+          { label: "Java", href: "/course/java" },
+        ],
+      },
+    ],
+  },
+  {
+    label: "About Us",
+    href: "/about",
+    className: "text-sm font-medium",
+    type: "link",
+  },
+  {
+    label: "Contact Us",
+    href: "/contact",
+    className: "text-sm font-medium",
+    type: "link",
+  },
+  {
+    label: "Admin Data",
+    href: "/adminData",
+    className: "text-sm font-medium",
+    type: "link",
+  },
+];
+
 const AppBar = () => {
   const { setTheme } = useTheme();
   const router = useRouter()
@@ -44,67 +122,60 @@ const AppBar = () => {
   return (
     <header className="sticky top-0 z-40 w-full border-b bg-white">
       <div className="container flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center gap-10">
-          <Link href={"/"} className="text-primary font-black">
-            Knowvex
-          </Link>
-
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <div className="group flex items-center cursor-pointer ">
-                <span className="group-hover:text-primary text-muted-foreground">
-                  courses
-                </span>
-                <ChevronDown className="ml-1 h-4 w-4 text-muted-foreground group-hover:text-primary" />
-              </div>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-56">
-              <DropdownMenuSub>
-                <DropdownMenuSubTrigger className="flex items-center">
-                  <span>Computer Science</span>
-                </DropdownMenuSubTrigger>
-                <DropdownMenuSubContent className="w-48">
-                  <Link href={"/course/android"}>
-                    <DropdownMenuItem>Android</DropdownMenuItem>
-                  </Link>
-                  <Link href={"/course/web"}>
-                    <DropdownMenuItem>Web</DropdownMenuItem>
-                  </Link>
-                  <Link href={"/course/ai"}>
-                    <DropdownMenuItem>AI</DropdownMenuItem>
-                  </Link>
-                  <Link href={"/course/devops"}>
-                    <DropdownMenuItem>DevOps</DropdownMenuItem>
-                  </Link>
-                </DropdownMenuSubContent>
-              </DropdownMenuSub>
-              <Link href={"/course/finance"}>
-                <DropdownMenuItem>Finance</DropdownMenuItem>
-              </Link>
-              <Link href={"/course/hr"}>
-                <DropdownMenuItem>HR</DropdownMenuItem>
-              </Link>
-            </DropdownMenuContent>
-          </DropdownMenu>
-          <Link
-            href="/about"
-            className="text-sm font-medium  hover:text-primary text-muted-foreground"
-          >
-            About Us
-          </Link>
-          <Link
-            href="/contact"
-            className="text-sm font-medium hover:text-primary text-muted-foreground"
-          >
-            Contact Us
-          </Link>
-          <Link
-            href="/adminData"
-            className="text-sm font-medium hover:text-primary text-muted-foreground"
-          >
-            Admin Data
-          </Link>
-        </div>
+      <div className="flex items-center gap-10">
+      {NAV_ITEMS.map((item:any, index) => {
+        if (item.type === "link") {
+          return (
+            <Link
+              key={index}
+              href={item.href}
+              className={`${item.className} hover:text-primary text-muted-foreground`}
+            >
+              {item.label}
+            </Link>
+          );
+        } else if (item.type === "dropdown") {
+          return (
+            <DropdownMenu key={index}>
+              <DropdownMenuTrigger asChild>
+                <div className="group flex items-center cursor-pointer">
+                  <span className="group-hover:text-primary text-muted-foreground">
+                    {item.label}
+                  </span>
+                  <ChevronDown className="ml-1 h-4 w-4 text-muted-foreground group-hover:text-primary" />
+                </div>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-56">
+                {item.subItems.map((subItem:any, subIndex:any) => {
+                  if (subItem.type === "submenu") {
+                    return (
+                      <DropdownMenuSub key={subIndex}>
+                        <DropdownMenuSubTrigger className="flex items-center">
+                          <span>{subItem.label}</span>
+                        </DropdownMenuSubTrigger>
+                        <DropdownMenuSubContent className="w-48">
+                          {subItem.subItems.map((innerItem:any, innerIndex:any) => (
+                            <Link key={innerIndex} href={innerItem.href}>
+                              <DropdownMenuItem>{innerItem.label}</DropdownMenuItem>
+                            </Link>
+                          ))}
+                        </DropdownMenuSubContent>
+                      </DropdownMenuSub>
+                    );
+                  }
+                  return (
+                    <Link key={subIndex} href={subItem.href}>
+                      <DropdownMenuItem>{subItem.label}</DropdownMenuItem>
+                    </Link>
+                  );
+                })}
+              </DropdownMenuContent>
+            </DropdownMenu>
+          );
+        }
+        return null;
+      })}
+    </div>
 
         <div className="flex items-center space-x-4">
           {active ? (

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Button } from "./ui/button";
-import { ArrowBigRight } from "lucide-react";
+import { ArrowBigRight, ArrowRight } from "lucide-react";
 
 export default function ArcCarousel() {
   const imageUrl = "images/HeroSection1.svg";
@@ -69,7 +69,7 @@ export default function ArcCarousel() {
           </div>
 
           <div className="absolute left-1/2 transform -translate-x-1/2 top-72">
-            <Link href="/contact"> <Button size={"lg"}>Let&apos;s Start <ArrowBigRight></ArrowBigRight></Button></Link>
+            <Link href="/contact"> <Button size={"lg"}>Let&apos;s Start <ArrowBigRight className="ml-2" fill="#FFF"></ArrowBigRight></Button></Link>
           </div>
         </div>
       </div>

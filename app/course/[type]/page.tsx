@@ -45,7 +45,7 @@ const CoursePage = ({ params }: { params: { type: string } }) => {
     }
   };
 
-  return (
+  return data ? (
     <>
       <section className="flex container mt-4  flex-col md:flex-row items-center justify-between">
         {/* left section  */}
@@ -316,7 +316,7 @@ const CoursePage = ({ params }: { params: { type: string } }) => {
         </section>
       </Reveal>
     </>
-  );
+  ) : <div>Data not present</div>;
 };
 
 export default CoursePage;

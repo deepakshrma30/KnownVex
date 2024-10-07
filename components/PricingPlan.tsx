@@ -30,7 +30,7 @@ function PricingPlanCard({
         <CardTitle className="text-2xl font-bold scroll-m-20 ">
           {title}
         </CardTitle>
-        <CardDescription className="text-white">{description}</CardDescription>
+        {/* <CardDescription className="text-white">{description}</CardDescription> */}
       </CardHeader>
       <CardContent className="flex justify-center flex-col items-center mt-2">
         <div className="mb-6 text-center">
@@ -71,7 +71,7 @@ function PricingPlanCard({
       </CardContent>
       <CardFooter>
         <Button className="w-full rounded-md bg-purple-500" variant={"default"}>
-          Choose {title} Plan
+          Choose Plan
         </Button>
       </CardFooter>
     </Card>

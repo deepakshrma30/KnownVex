@@ -67,6 +67,9 @@ export const COURSE_CONTANTS: any = {
         ],
       },
     ],
+
+    productName:"WEB_DEVELOPMENT"
+
   },
   android: {
     words: [
@@ -106,6 +109,7 @@ export const COURSE_CONTANTS: any = {
       "Secure",
       "Customizable",
     ],
+        productName:"ANDROID"
   },
   ai: {
     words: [
@@ -145,6 +149,7 @@ export const COURSE_CONTANTS: any = {
       "Predictive",
       "Analytical",
     ],
+    productName:"AI"
   },
   devops: {
     words: [
@@ -183,6 +188,7 @@ export const COURSE_CONTANTS: any = {
       "Monitored",
       "Streamlined",
     ],
+        productName:"DEVOPS"
   },
   finance: {
     words: [
@@ -221,6 +227,7 @@ export const COURSE_CONTANTS: any = {
       "Scalable",
       "Dynamic",
     ],
+            productName:"FINANCE"
   },
   hr: {
     words: [
@@ -259,6 +266,7 @@ export const COURSE_CONTANTS: any = {
       "Inclusive",
       "Dynamic",
     ],
+    productName:"HUMAN_RESOURCE"
   },
 };
 ;
@@ -270,6 +278,7 @@ export const PRICING_PLAN = [
     description: "For Self",
     price: "10,000",
     originalPrice:"5,000",
+    plan:"SELF",
     recommended:false,
     features: [
       { name: "Recorded sessions", included: true },
@@ -289,6 +298,7 @@ export const PRICING_PLAN = [
     price: "12,000",
     originalPrice:"6,000",
     recommended:true,
+    plan:"MENTOR",
     features: [
       { name: "Recorded sessions", included: true },
       { name: "Hands-on internship", included: true },
@@ -307,6 +317,7 @@ export const PRICING_PLAN = [
     price: "16,000",
     originalPrice:"8,000",
     recommended:false,
+    plan:"PROFESSIONAL",
     features: [
       { name: "Recorded sessions", included: true },
       { name: "Hands-on internship", included: true },

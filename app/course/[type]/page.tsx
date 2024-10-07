@@ -37,6 +37,8 @@ const CoursePage = ({ params }: { params: { type: string } }) => {
 
   const data = COURSE_CONTANTS[type];
 
+
+
   const pricingSectionRef = useRef<HTMLDivElement>(null);
 
   const scrollToPricing = () => {
@@ -310,6 +312,8 @@ const CoursePage = ({ params }: { params: { type: string } }) => {
                 features={plan.features}
                 recommended={plan.recommended}
                 originalPrice={plan.originalPrice}
+                productName={data.productName}
+                planName={plan.plan}
               />
             ))}
           </div>

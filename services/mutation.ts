@@ -1,5 +1,8 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { signUpUser } from "./api";
+import { addCartItem, signUpUser } from "./api";
+import { toast } from "sonner";
+import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export function useSignUp(){
     const queryClient = useQueryClient();
@@ -16,4 +19,28 @@ export function useSignUp(){
         // },
     
       })
+}
+
+export function useAddCart(){
+  const router=useRouter()
+  const queryClient=useQueryClient();
+  return useMutation({
+    mutationFn:addCartItem,
+    onSuccess:()=>{
+      toast.success("Course added to cart",{
+        action: {
+          label: 'Go to Cart',
+          onClick: () => router.push("/cart")
+        },
+      })
+      
+      queryClient.invalidateQueries({queryKey:["CART"]})
+    },
+    onError(error,variable,context) {
+      
+      toast.error(error?.message)
+    },
+    
+  })
+
 }

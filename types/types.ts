@@ -37,7 +37,7 @@ export type SignUpFormData = {
   }
 
   export  interface CartItems{
-    id:string;
+    id?:string;
     product:string;
     plan:string;
 

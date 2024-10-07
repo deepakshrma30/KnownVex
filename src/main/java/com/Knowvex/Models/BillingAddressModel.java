@@ -25,10 +25,7 @@ public class BillingAddressModel {
     UserModel user;
 
     @Column(nullable = false)
-    String firstName;
-
-    @Column(nullable = false)
-    String lastName;
+    String name;
 
     @Column(nullable = false)
     String city;

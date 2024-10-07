@@ -9,11 +9,14 @@ public enum ProductEnum {
     IOT_ROBOTICS,
     CLOUD_COMPUTING,
     HYBRID_ELECTRIC_VEHICLE,
-    AUTO_CAD,
+    AUTO_CAD, // AutoCAD
     DIGITAL_MARKETING,
     FINANCE,
     HUMAN_RESOURCE,
-    C_CPLUSPLUS,
+    C_CPLUSPLUS, // C & C++
     PYTHON,
-    JAVA;
+    JAVA,
+    ANDROID,
+    DEVOPS,
+    MARKETING,
 }

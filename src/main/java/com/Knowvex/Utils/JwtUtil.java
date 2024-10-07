@@ -60,9 +60,17 @@ public class JwtUtil {
     public String generateToken(String username, UUID userId) {
         HashMap<String, Object> claims = new HashMap<>();
         claims.put("userId",userId.toString());
+
+        long issuedAtMillis = System.currentTimeMillis();
+        long expirationMillis = issuedAtMillis + (1000 * JWT_TOKEN_VALIDITY); // 10 hours
+
+        System.out.println("Issued At: " + new Date(issuedAtMillis));
+        System.out.println("Expiration: " + new Date(expirationMillis));
+
+
         return Jwts.builder().setClaims(claims).setSubject(username)
-                .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * JWT_TOKEN_VALIDITY)) // 10 hours
+                .setIssuedAt(new Date(issuedAtMillis))
+                .setExpiration(new Date(expirationMillis)) // 10 hours
                 .signWith(getSignKey(), SignatureAlgorithm.HS256).compact();
     }
 

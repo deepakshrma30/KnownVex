@@ -11,6 +11,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/cart")
 @AllArgsConstructor
+@CrossOrigin("*")
 public class CartController {
 
     private final CartService cartService;

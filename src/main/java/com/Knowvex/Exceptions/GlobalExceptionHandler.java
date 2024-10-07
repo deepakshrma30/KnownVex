@@ -1,6 +1,7 @@
 package com.Knowvex.Exceptions;
 
 import com.Knowvex.Exceptions.CustomExceptions.CartItemAlreadyExistsException;
+import com.Knowvex.Exceptions.CustomExceptions.InvalidTokenException;
 import com.Knowvex.Exceptions.CustomExceptions.UserNotAuthenticatedException;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
@@ -10,6 +11,11 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
+
+    @ExceptionHandler(InvalidTokenException.class)
+    private ResponseEntity<String> invalidTokenHandler(InvalidTokenException e){
+        return ResponseEntity.badRequest().body(e.getMessage());
+    }
 
     @ExceptionHandler(IllegalArgumentException.class)
     private ResponseEntity<String> exceptionHandler(IllegalArgumentException e){

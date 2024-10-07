@@ -33,14 +33,9 @@ public class UserModel implements UserDetails {
     private UUID id;
 
     @JsonView(ViewUtil.signup.class)
-    @Column(nullable = false, name = "first_name")
+    @Column(nullable = false)
     @NotBlank(message = "First name cannot be empty")
-    private String firstName;
-
-    @JsonView(ViewUtil.signup.class)
-    @Column(nullable = false, name = "last_name")
-    @NotBlank(message = "Last name cannot be empty")
-    private String lastName;
+    private String name;
 
     @Column(nullable = false, unique = true)
     @JsonView({ViewUtil.signup.class, ViewUtil.login.class})
@@ -121,6 +116,6 @@ public class UserModel implements UserDetails {
     @Override
     @JsonIgnore
     public boolean isEnabled() {
-        return this.active;
+        return true;
     }
 }

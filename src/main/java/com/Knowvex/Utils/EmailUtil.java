@@ -41,7 +41,7 @@ public class EmailUtil {
         Context cxt = new Context();
         cxt.setVariable("name", name);
         setCommonVariables(cxt);
-        sendMail(toEmail, "Reset Knowex Password", cxt, "resetPasswordTemplate");
+        sendMail(toEmail, "Excited to Have You on Board, Welcome to Knowvex!", cxt, "welcomeTemplate");
     }
 
     @Async

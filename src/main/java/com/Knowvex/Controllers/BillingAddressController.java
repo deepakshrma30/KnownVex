@@ -14,6 +14,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/billing-addresses")
 @RequiredArgsConstructor
+@CrossOrigin("*")
 public class BillingAddressController {
 
     private final BillingAddressService billingAddressService;

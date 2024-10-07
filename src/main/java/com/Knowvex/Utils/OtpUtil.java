@@ -21,18 +21,21 @@ public class OtpUtil {
     private OtpRepository otpRepository;
 
     public long generateOtp(String email) {
-        OtpModel otpModel = createOtp(email);
-        otpRepository.save(otpModel);
-        return otpModel.getOtp();
-    }
+        Optional<OtpModel> existingOtp = Optional.ofNullable(otpRepository.findByEmailIgnoreCase(email));
 
-    public long resendOtp(String email) {
-        Optional<OtpModel> existingOtpOpt = Optional.ofNullable(otpRepository.findByEmailIgnoreCase(email));
-        Timestamp now = new Timestamp(System.currentTimeMillis());
-        if (existingOtpOpt.isEmpty() || existingOtpOpt.get().getExpiresAt().before(now)) {
-            return generateOtp(email);
+        if (existingOtp.isPresent()) {
+            OtpModel otpModel = existingOtp.get();
+            Timestamp now = new Timestamp(System.currentTimeMillis());
+            if (otpModel.getExpiresAt().after(now)) {
+                return otpModel.getOtp();
+            } else {
+                otpRepository.delete(otpModel);
+            }
         }
-        return existingOtpOpt.get().getOtp();
+
+        OtpModel newOtpModel = createOtp(email);
+        otpRepository.save(newOtpModel);
+        return newOtpModel.getOtp();
     }
 
     public boolean isValidOtp(String email, long otp) {

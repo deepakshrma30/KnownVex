@@ -1,20 +1,19 @@
 package com.Knowvex.Models;
 
-import com.Knowvex.Enums.PlanEnum;
-import com.Knowvex.Enums.ProductEnum;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.Knowvex.Enums.OrderStatusEnum;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table(name = "cart")
+@Table(name = "orders")
 @Data
-public class CartModel {
+public class OrderModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,21 +21,19 @@ public class CartModel {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    @JsonIgnore
     private UserModel user;
 
-    @Enumerated(EnumType.STRING)
-    private ProductEnum product;
+    @Column
+    private double totalAmount;
+
+    @Column
+    private String items;
 
     @Enumerated(EnumType.STRING)
-    private PlanEnum plan;
+    private OrderStatusEnum status;
 
     @CreationTimestamp
-    @JsonIgnore
-    private Timestamp createdAt;
-
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    public long getAmount() {
-        return plan.getAMOUNT();
-    }
+    @Column(updatable = false)
+    Timestamp createdAt;
 }

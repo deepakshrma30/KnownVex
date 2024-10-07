@@ -1,6 +1,7 @@
 package com.Knowvex.Services.Imp;
 
 import com.Knowvex.Enums.RoleEnum;
+import com.Knowvex.Exceptions.CustomExceptions.InvalidTokenException;
 import com.Knowvex.Models.UserModel;
 import com.Knowvex.Repositories.UserRepository;
 import com.Knowvex.Services.UserService;
@@ -56,28 +57,42 @@ public class UserServiceImp implements UserService {
         user.setActive(false);
         user.setRole(RoleEnum.USER);
         long otp = otpUtil.generateOtp(user.getEmail());
-        emailUtil.sendOtpMail(user.getEmail(), otp, user.getFirstName());
+        emailUtil.sendOtpMail(user.getEmail(), otp, user.getName());
         userRepository.save(user);
         return user;
     }
 
     @Override
-    public boolean verifyOtp(String email, long otp) throws MessagingException {
-        if (otpUtil.isValidOtp(email, otp)) {
-            UserModel user = userRepository.findByEmailIgnoreCase(email);
-            user.setActive(true);
-            emailUtil.sendWelcomeEmail(user.getEmail(),user.getFirstName());
-            userRepository.save(user);
-            return true;
+    public UserModel verifyOtp(String email, long otp, boolean isLogin,HttpServletResponse response) throws MessagingException, InvalidTokenException {
+        UserModel user = userRepository.findByEmailIgnoreCase(email);
+        if (user == null) {
+            throw new InvalidTokenException("User not found.");
         }
-        return false;
+        if (!otpUtil.isValidOtp(email, otp)) {
+            throw new InvalidTokenException("Invalid OTP.");
+        }
+        if (!user.getActive()) {
+            user.setActive(true);
+            emailUtil.sendWelcomeEmail(user.getEmail(), user.getName());
+        }
+
+        if(isLogin){
+            String token = jwtUtil.generateToken(user.getEmail(),user.getId());
+            Cookie cookie=new Cookie(AUTH_KEY,token);
+            cookie.setPath("/knowvex");
+            cookie.setMaxAge(60 * 60);
+            response.addCookie(cookie);
+        }
+
+        return userRepository.save(user);
     }
+
 
     @Override
     public boolean resendOtp(String email) throws MessagingException, IOException {
         UserModel user = userRepository.findByEmailIgnoreCase(email);
-        long otp = otpUtil.resendOtp(email);
-        emailUtil.sendOtpMail(user.getEmail(), otp, user.getFirstName());
+        long otp = otpUtil.generateOtp(email);
+        emailUtil.sendOtpMail(user.getEmail(), otp, user.getName());
         return true;
     }
 
@@ -88,7 +103,7 @@ public class UserServiceImp implements UserService {
             throw new IllegalArgumentException("No user found with this email");
         }
         String token = resetTokenUtil.generateToken(user.getEmail());
-        emailUtil.sendResetPasswordMail(user.getEmail(), token, user.getFirstName());
+        emailUtil.sendResetPasswordMail(user.getEmail(), token, user.getName());
         return true;
     }
 
@@ -110,7 +125,7 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public UserModel login(UserModel user, HttpServletResponse response) {
+    public UserModel login(UserModel user, HttpServletResponse response) throws MessagingException {
         Authentication authentication = authenticationManager
                 .authenticate(new UsernamePasswordAuthenticationToken(user.getEmail(),user.getPassword()));
         if (!authentication.isAuthenticated()) {
@@ -119,11 +134,16 @@ public class UserServiceImp implements UserService {
 
         UserModel userModel = (UserModel) authentication.getPrincipal();
 
-        String token = jwtUtil.generateToken(userModel.getEmail(),userModel.getId());
-
-        Cookie cookie=new Cookie(AUTH_KEY,token);
-        cookie.setPath("/knowvex");
-        response.addCookie(cookie);
+        if(userModel.getActive()){
+            String token = jwtUtil.generateToken(userModel.getEmail(),userModel.getId());
+            Cookie cookie=new Cookie(AUTH_KEY,token);
+            cookie.setPath("/knowvex");
+            cookie.setMaxAge(60 * 60);
+            response.addCookie(cookie);
+        }else{
+            long otp = otpUtil.generateOtp(userModel.getEmail());
+            emailUtil.sendOtpMail(user.getEmail(), otp, user.getName());
+        }
 
         return userModel;
     }

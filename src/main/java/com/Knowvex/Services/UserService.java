@@ -1,5 +1,6 @@
 package com.Knowvex.Services;
 
+import com.Knowvex.Exceptions.CustomExceptions.InvalidTokenException;
 import com.Knowvex.Models.UserModel;
 import com.Knowvex.Utils.ViewUtil;
 import com.fasterxml.jackson.annotation.JsonView;
@@ -13,7 +14,7 @@ public interface UserService {
     @JsonView(ViewUtil.signup.class)
     UserModel createUser(UserModel user) throws Exception;
 
-    boolean verifyOtp(String email,long otp) throws MessagingException;
+    UserModel verifyOtp(String email,long otp,boolean isLogin,HttpServletResponse response) throws MessagingException, InvalidTokenException;
 
     boolean resendOtp(String email) throws MessagingException, IOException;
 
@@ -23,5 +24,5 @@ public interface UserService {
 
     boolean isTokenValid(String token);
 
-    UserModel login(UserModel user, HttpServletResponse response);
+    UserModel login(UserModel user, HttpServletResponse response) throws MessagingException;
 }

@@ -1,5 +1,6 @@
 package com.Knowvex.Controllers;
 
+import com.Knowvex.Exceptions.CustomExceptions.InvalidTokenException;
 import com.Knowvex.Models.UserModel;
 import com.Knowvex.Services.UserService;
 import com.Knowvex.Utils.ViewUtil;
@@ -14,6 +15,7 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping("/user")
+@CrossOrigin("*")
 public class UserController {
 
     @Autowired
@@ -36,8 +38,8 @@ public class UserController {
     }
 
     @GetMapping("/otp/verify")
-    private boolean otpVerify(@RequestParam String email,@RequestParam long otp) throws MessagingException {
-        return userService.verifyOtp(email,otp);
+    private UserModel otpVerify(@RequestParam String email,@RequestParam long otp,@RequestParam boolean isLogin,HttpServletResponse response) throws MessagingException, InvalidTokenException {
+        return userService.verifyOtp(email,otp,isLogin,response);
     }
 
     @GetMapping("/otp/resend")
@@ -62,7 +64,7 @@ public class UserController {
 
     @PostMapping("/login")
     @JsonView(ViewUtil.signup.class)
-    private UserModel login(@JsonView(ViewUtil.login.class) @RequestBody UserModel user, HttpServletResponse response){
+    private UserModel login(@JsonView(ViewUtil.login.class) @RequestBody UserModel user, HttpServletResponse response) throws MessagingException {
         return userService.login(user,response);
     }
 }

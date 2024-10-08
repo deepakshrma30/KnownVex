@@ -63,7 +63,12 @@ export const login = async ({
 };
 
 export const getCartItems = async () => {
-  const response = await axiosInstance.get("/cart/all");
+  const response = await axiosInstance.get("/cart/all",{
+    headers: {
+      "Auth-token":
+        "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiJiZDRlZTQyMy0yYmRlLTRlMjYtOGNlNi0xYjU0NjczMWFmNTciLCJzdWIiOiJhZG1pbjEyM0B5b3BtYWlsLmNvbSIsImlhdCI6MTcyODQxNTIyMiwiZXhwIjoxNzI4NDUxMjIyfQ.MpMyiF6C2M3Z-7M2sraO_S0pWY1gi8-CVErfi8TsYz0",
+    },
+  });
   return response?.data;
 };
 
@@ -79,7 +84,22 @@ export const addCartItem = async ({
     plan,
   };
 
-  const response = await axiosInstance.post("/cart/add",body);
-  
+  const response = await axiosInstance.post("/cart/add", body, {
+    headers: {
+      "Auth-token":
+        "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiJiZDRlZTQyMy0yYmRlLTRlMjYtOGNlNi0xYjU0NjczMWFmNTciLCJzdWIiOiJhZG1pbjEyM0B5b3BtYWlsLmNvbSIsImlhdCI6MTcyODQxNTIyMiwiZXhwIjoxNzI4NDUxMjIyfQ.MpMyiF6C2M3Z-7M2sraO_S0pWY1gi8-CVErfi8TsYz0",
+    },
+  });
+
   return response?.data;
+};
+
+export const deleteCartItem = async ({ id }: { id: string }) => {
+  const response = await axiosInstance.delete("/cart/remove/" + id, {
+    headers: {
+      "Auth-token":
+        "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiJiZDRlZTQyMy0yYmRlLTRlMjYtOGNlNi0xYjU0NjczMWFmNTciLCJzdWIiOiJhZG1pbjEyM0B5b3BtYWlsLmNvbSIsImlhdCI6MTcyODQxNTIyMiwiZXhwIjoxNzI4NDUxMjIyfQ.MpMyiF6C2M3Z-7M2sraO_S0pWY1gi8-CVErfi8TsYz0",
+    },
+  });
+  return response;
 };

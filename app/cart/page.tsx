@@ -10,9 +10,14 @@ import {
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { useCartStore } from "@/lib/store";
+import { getCartItems } from "@/services/api";
+import { useCartItemDelete } from "@/services/mutation";
+import { CartResponse, PlanName, PlanType } from "@/types/types";
+import { useQuery } from "@tanstack/react-query";
+import { current } from "immer";
 import { Minus, Plus, Trash2 } from "lucide-react";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 
 const initialCartItems = [
   {
@@ -37,13 +42,30 @@ const initialCartItems = [
     image: "/placeholder.svg?height=100&width=100",
   },
 ];
+
 const CartScreen = () => {
   const [cartItems, setCartItems] = useState(initialCartItems);
-  const getCartItems=useCartStore((state)=>state.getCart)
+  const { data, isError, isLoading } = useQuery<CartResponse[]>({
+    queryKey: ["CART"],
+    queryFn: getCartItems,
+    staleTime:60 * 1000,
+  });
 
-  const items=getCartItems()
-  console.log(items,"items")
-    
+  const deleteCart=useCartItemDelete()
+
+  console.log(data);
+  const handleDelete=(id:string)=>{
+    deleteCart.mutate({id});
+  }
+
+  const totalAmount=useMemo(()=>{
+    if (!data || data.length === 0) return 0;
+    const result =data?.reduce((acc,current)=>{
+      return acc+current.amount;
+    },0)
+    return result;
+  },[data])
+
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">Your Cart</h1>
@@ -53,17 +75,26 @@ const CartScreen = () => {
             <CardTitle>Cart Items</CardTitle>
           </CardHeader>
           <CardContent className="grid gap-4">
-            {cartItems.map((item) => (
+            {data?.map((item) => (
               <div key={item.id} className="flex items-center space-x-4">
-                
                 <div className="flex-1">
-                  <h3 className="font-semibold">{item.name}</h3>
+                  <h3 className="font-semibold">
+                    {PlanName[item?.product as keyof typeof PlanName]}
+                  </h3>
+                  <h4 className="font-normal text-sm">
+                    {PlanType[item?.plan as keyof typeof PlanType]}
+                  </h4>
                   <p className="text-sm text-gray-500">
-                    ${item.price.toFixed(2)}
+                    {item.amount.toLocaleString("en-IN", {
+                      style: "currency",
+                      currency: "INR",
+                      minimumFractionDigits: 0,
+                      maximumFractionDigits: 0,
+                    })}
                   </p>
                 </div>
 
-                <Button variant="secondary" size="icon">
+                <Button variant="secondary" size="icon" onClick={()=>handleDelete(item?.id)}>
                   <Trash2 className="h-6 w-6 text-red-500" />
                 </Button>
               </div>
@@ -77,10 +108,17 @@ const CartScreen = () => {
           <CardContent className="space-y-4">
             <div className="flex justify-between">
               <span>Subtotal</span>
-              <span>$50</span>
+              <span>{
+                totalAmount?.toLocaleString("en-IN", {
+                  style: "currency",
+                  currency: "INR",
+                  minimumFractionDigits: 0,
+                  maximumFractionDigits: 0,
+                })
+                }</span>
             </div>
             <div className="flex justify-between">
-              <span>Shipping</span>
+              <span>GST</span>
               <span>$50</span>
             </div>
             <Separator />

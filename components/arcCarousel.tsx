@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import { Cloud, Trophy } from "lucide-react";
+import Link from "next/link";
+import { Button } from "./ui/button";
+import { ArrowBigRight, ArrowRight } from "lucide-react";
 
 export default function ArcCarousel() {
-  const imageUrl =
-    "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202024-08-18%20165600-cp1faVh3VwRdgYKoXjC35rAYj67nKy.png";
+  const imageUrl = "images/HeroSection1.svg";
   const [currentIndex, setCurrentIndex] = useState(2);
   const totalImages = 5;
 
@@ -60,7 +60,7 @@ export default function ArcCarousel() {
                 style={getImageStyle(i)}
               >
                 <img
-                  src={imageUrl}
+                  src={"images/HeroSection"+ (i + 1) +".svg"}
                   alt="Person with papers"
                   className="w-full h-full rounded-full object-cover object-center"
                 />
@@ -69,7 +69,7 @@ export default function ArcCarousel() {
           </div>
 
           <div className="absolute left-1/2 transform -translate-x-1/2 top-72">
-            <Button size={"lg"} >Let&apos;s Start </Button>
+            <Link href="/contact"> <Button size={"lg"}>Let&apos;s Start <ArrowBigRight className="ml-2" fill="#FFF"></ArrowBigRight></Button></Link>
           </div>
         </div>
       </div>

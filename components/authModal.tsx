@@ -37,6 +37,8 @@ import { useSignUp } from "@/services/mutation";
 import { toast } from "sonner";
 import { useStore } from "@/lib/store";
 import { useShallow } from "zustand/react/shallow";
+import { login, verifyOtp } from "@/services/api";
+import { loginResponse } from "@/types/types";
 
 const phoneUtil = PhoneNumberUtil.getInstance();
 
@@ -44,11 +46,34 @@ export default function AuthModal() {
 
 
   const { open, handleLogin,handleOTPModal } = useCounterStore((state) => state);
-  const { setUser } = useStore(
+  const { setUser,setEmail,setActive } = useStore(
     useShallow((state) => ({
       setUser: state.setUser,
+      setEmail:state.setEmail,
+      setActive:state.setActive
     }))
   );
+
+  const loginMutation=useMutation({
+    mutationFn:login,
+    onSuccess:(data:loginResponse)=>{
+      setIsLoading(false)
+      setUser(data)
+      if(data.active){
+        toast.success("Logged in")
+        handleLogin()
+      }else{
+        handleLogin()
+        handleOTPModal()
+        // setActive(data.active)
+      }
+    },
+    onError(error, variables, context) {
+      setIsLoading(false)
+      toast.error(error.message)
+    },
+  })
+
   const signup = useSignUp();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -148,6 +173,9 @@ export default function AuthModal() {
 
   function onSubmit(values: z.infer<typeof loginFormSchema>) {
     console.log(values);
+    setIsLoading(true);
+    loginMutation.mutate(values)
+
   }
 
   function onSubmitSignUp(values: z.infer<typeof SignUpFormSchema>) {
@@ -157,7 +185,8 @@ export default function AuthModal() {
       onSuccess:(data:any)=>{
         setIsLoading(false)
         console.log(data)
-        // setUser(data)
+        setEmail(data.email)
+        
         handleLogin();
         signUpForm.reset();
         handleOTPModal()
@@ -328,7 +357,7 @@ export default function AuthModal() {
                           <FormLabel>Confirm Password</FormLabel>
                           <FormControl>
                             <Input
-                              placeholder="confirmPassword"
+                              placeholder="Confirm Password"
                               {...field}
                               value={field.value}
                               onChange={field.onChange}

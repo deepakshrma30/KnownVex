@@ -8,6 +8,10 @@ import {
   CardTitle,
 } from "./ui/card";
 import { Button } from "./ui/button";
+import { useCartStore } from "@/lib/store";
+import { useShallow } from "zustand/react/shallow";
+import { useAddCart } from "@/services/mutation";
+import { addCartProps } from "@/types/types";
 
 function PricingPlanCard({
   title,
@@ -16,6 +20,8 @@ function PricingPlanCard({
   features,
   recommended = true,
   originalPrice,
+  productName,
+  planName,
 }: {
   title: string;
   description: string;
@@ -23,14 +29,25 @@ function PricingPlanCard({
   features: { name: string; included: boolean }[];
   recommended?: boolean;
   originalPrice: string;
+  productName: string;
+  planName: string;
 }) {
+  const apiAdd = useAddCart();
+  // const {addCart}=useCartStore(
+  //   useShallow((state)=>{
+  //     addCart:state.addCart
+  //   })
+  // )
+  const handleClick = (cartItem: addCartProps) => {
+    apiAdd.mutate(cartItem);
+  };
   return (
     <Card className="w-full rounded-md ">
       <CardHeader className="flex items-center justify-center rounded-md bg-purple-500 text-white">
         <CardTitle className="text-2xl font-bold scroll-m-20 ">
           {title}
         </CardTitle>
-        <CardDescription className="text-white">{description}</CardDescription>
+        {/* <CardDescription className="text-white">{description}</CardDescription> */}
       </CardHeader>
       <CardContent className="flex justify-center flex-col items-center mt-2">
         <div className="mb-6 text-center">
@@ -47,15 +64,15 @@ function PricingPlanCard({
           </span>
           {/* <span className="text-muted-foreground">/month</span> */}
           <div className="text-sm text-muted-foreground mt-1">
-            <span className="line-through"> {parseFloat(price.replace(/,/g, "")).toLocaleString(
-              "en-IN",
-              {
+            <span className="line-through">
+              {" "}
+              {parseFloat(price.replace(/,/g, "")).toLocaleString("en-IN", {
                 style: "currency",
                 currency: "INR",
                 minimumFractionDigits: 0,
                 maximumFractionDigits: 0,
-              }
-            )}</span>
+              })}
+            </span>
             <span className="ml-2 text-green-500 font-semibold">
               Save {calculateDiscount(price, originalPrice)}
             </span>
@@ -70,8 +87,14 @@ function PricingPlanCard({
         </ul>
       </CardContent>
       <CardFooter>
-        <Button className="w-full rounded-md bg-purple-500" variant={"default"}>
-          Choose {title} Plan
+        <Button
+          className="w-full rounded-md bg-purple-500"
+          variant={"default"}
+          onClick={() => {
+            handleClick({ plan: planName, product: productName });
+          }}
+        >
+          Choose Plan
         </Button>
       </CardFooter>
     </Card>

@@ -1,6 +1,6 @@
 import { UserActions, userInfo } from "@/types/types";
 import { StateCreator } from "zustand";
-import { persist, createJSONStorage } from "zustand/middleware";
+
 
 export const initialState: userInfo = {
     id:"",
@@ -33,6 +33,12 @@ export const createUserSlice: StateCreator<
         email: get().email,
         phoneNumber:get().phoneNumber,
         role:get().role
+      }),
+      setEmail:(email:string)=>set((state)=>{
+        state.email=email
+      }),
+      setActive:(flag:boolean)=>set((state)=>{
+        state.active=flag
       }),
     reset:()=>{
         set(initialState)

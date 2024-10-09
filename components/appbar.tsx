@@ -59,8 +59,8 @@ const NAV_ITEMS = [
         label: "MEC",
         type: "submenu",
         subItems: [
-          { label: "Hybrid & Electric Vehicles", href: "/course/vehicle" },
-          { label: "AutoCAD", href: "/course/cad" }, // Corrected "Auto cod" to "AutoCAD".
+          { label: "Hybrid & Electric Vehicles", href: "/course/hybridElectricVehicle" },
+          { label: "AutoCAD", href: "/course/autocad" }, // Corrected "Auto cod" to "AutoCAD".
         ],
       },
       {
@@ -76,7 +76,7 @@ const NAV_ITEMS = [
         label: "Programming Language",
         type: "submenu",
         subItems: [
-          { label: "C & C++", href: "/course/c++" },
+          { label: "C & C++", href: "/course/cplus" },
           { label: "Python", href: "/course/python" },
           { label: "Java", href: "/course/java" },
         ],

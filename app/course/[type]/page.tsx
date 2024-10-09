@@ -80,37 +80,38 @@ const CoursePage = ({ params }: { params: { type: string } }) => {
       </section>
 
       <section className=" bg-[#4805BE]  rounded-2xl container mt-10 ">
-        <div className="   text-white p-6  flex flex-col md:flex-row justify-between items-center">
+        <div className="   text-white p-6  flex flex-col md:flex-row justify-between gap-8">
           {/* left part  */}
-          <div className="space-y-4 md:w-1/2">
-            <div className=" p-4 w-24 rounded-lg">
+          <div className="space-y-4 md:w-2/3">
+            {/* <div className=" p-4 w-24 rounded-lg">
               <Image src="/images/1.svg" alt="icon" width={100} height={50} />
-            </div>
-            <h3 className="text-lg font-semibold">Learn The Latest Skills</h3>
+            </div> */}
+            <h3 className="text-lg font-bold">Program Overview</h3>
             <p className="text-sm">
-              Contrary to popular belief, Lorem Ipsum is not simply random text.
-              It has roots in a piece of classical Latin literature from 45 BC,
-              making it over 2000 years old.
+              {data.programOverview}
             </p>
           </div>
-
+          <div className="w-px min-h-full bg-white"></div>
           {/* right part  */}
-          <div className="space-y-4 md:w-1/2 mt-8 md:mt-0">
-            <div className=" p-4 w-24 rounded-lg">
+          <div className="space-y-4 md:w-1/3 mt-8 md:mt-0">
+            {/* <div className=" p-4 w-24 rounded-lg">
               <Image src="/images/2.svg" alt="icon" width={100} height={50} />
+            </div> */}
+            <h3 className="text-lg font-bold">Delivery Mode</h3>
+            <div className="text-sm flex gap-8">
+              {data?.deliveryMode.map((mode: any) => (
+                <div key={mode.text} className="flex flex-col justify-center items-center">
+                  <img className="w-16" src={mode.icon} alt="" />
+                  <span>{mode.text}</span>
+                </div>
+              ))}
             </div>
-            <h3 className="text-lg font-semibold">Earn a Certificate</h3>
-            <p className="text-sm">
-              Contrary to popular belief, Lorem Ipsum is not simply random text.
-              It has roots in a piece of classical Latin literature from 45 BC,
-              making it over 2000 years old.
-            </p>
           </div>
         </div>
       </section>
 
       {/* tabs */}
-      <Reveal>
+      {/* <Reveal>
         <section className="container p-4  mt-4 relative">
           <Tabs defaultValue="tab1">
             <TabsList className="grid grid-cols-3  w-full  bg-slate-950 text-white">
@@ -133,10 +134,6 @@ const CoursePage = ({ params }: { params: { type: string } }) => {
                     exit={{ y: -10, opacity: 0 }}
                     transition={{ duration: 0.2 }}
                   >
-                    <CardHeader>
-                      <CardTitle>{tab.heading}</CardTitle>
-                      <CardDescription>{tab.description}</CardDescription>
-                    </CardHeader>
                     <CardContent>
                       <p>{tab.content}</p>
                     </CardContent>
@@ -146,7 +143,7 @@ const CoursePage = ({ params }: { params: { type: string } }) => {
             ))}
           </Tabs>
         </section>
-      </Reveal>
+      </Reveal> */}
 
       <section className="container mt-4 ">
         <Reveal>
@@ -231,7 +228,7 @@ const CoursePage = ({ params }: { params: { type: string } }) => {
                   key={index}
                   value={item?.program}
                   onClick={() => {
-                    setSelectedProgram(item?.program);
+                    setSelectedProgram((prev) => prev === item?.program ? '' : item?.program);
                   }}
                 >
                   <AccordionTrigger
@@ -271,24 +268,27 @@ const CoursePage = ({ params }: { params: { type: string } }) => {
             {/* right section  */}
 
             <div className="relative w-full lg:max-w-xl">
-              <div className="absolute inset-0 h-1/2 top-20 w-full bg-purple-200 rounded-lg -z-10" />
-              <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
-                {SERVICES?.map((item, index) => (
-                  <div
-                    key={index}
-                    className="flex flex-col items-center space-y-1 justify-center bg-white shadow-md rounded-lg p-4"
-                  >
-                    {/* <div className="text-purple-600 mb-4">
-                  {item.icon}
-                  </div> */}
-                    <img src={item.src} className="h-28 object-cover" />
-                    <p className="text-sm font-semibold text-gray-700">
-                      {item.label}
-                    </p>
+            <div className="absolute inset-0 h-1/2 top-20 w-full bg-purple-200 rounded-lg -z-10" />
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
+              {SERVICES?.map((item, index) => (
+                <div
+                  key={index}
+                  className="group relative flex flex-col items-center space-y-1 justify-center bg-white shadow-md rounded-lg p-4 overflow-hidden"
+                >
+                  {/* Image and Label */}
+                  <img src={item.src} className="h-28 object-cover" />
+                  <p className="text-sm font-semibold text-gray-700">
+                    {item.label}
+                  </p>
+                  
+                  {/* Hover Summary */}
+                  <div className="absolute inset-0 flex flex-col items-center justify-center bg-purple-600 bg-opacity-90 text-white opacity-0 group-hover:opacity-100 transform translate-y-full group-hover:translate-y-0 transition duration-300 ease-in-out p-4">
+                    <p className="text-sm">{item.summary}</p>
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
+          </div>
           </div>
         </section>
       </Reveal>

@@ -20,26 +20,26 @@ export function useSignUp() {
   });
 }
 
-export function useAddCart() {
-  const router = useRouter();
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: addCartItem,
-    onSuccess: () => {
-      toast.success("Course added to cart", {
-        action: {
-          label: "Go to Cart",
-          onClick: () => router.push("/cart"),
-        },
-      });
+// export function useAddCart() {
+//   const router = useRouter();
+//   const queryClient = useQueryClient();
+//   return useMutation({
+//     mutationFn: addCartItem,
+//     onSuccess: () => {
+//       toast.success("Course added to cart", {
+//         action: {
+//           label: "Go to Cart",
+//           onClick: () => router.push("/cart"),
+//         },
+//       });
 
-      queryClient.invalidateQueries({ queryKey: ["CART"] });
-    },
-    onError(error, variable, context) {
-      toast.error(error?.message);
-    },
-  });
-}
+//       queryClient.invalidateQueries({ queryKey: ["CART"] });
+//     },
+//     onError(error, variable, context) {
+//       toast.error(error?.message);
+//     },
+//   });
+// }
 export function useCartItemDelete() {
   const queryClient = useQueryClient();
   return useMutation({

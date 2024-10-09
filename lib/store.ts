@@ -3,7 +3,7 @@ import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 import { createUserSlice, userSlice } from "./userSlice";
 import { createJSONStorage, persist } from "zustand/middleware";
-import { CartSlice, createCartSlice } from "./cartSlice";
+// import { CartSlice, createCartSlice } from "./cartSlice";
 export type Store = userSlice;
 
 
@@ -23,8 +23,8 @@ export const useStore = create<Store>()(
       // })),
 );
 
-export const useCartStore = create<CartSlice>()(
-  immer((...a) => ({
-    ...createCartSlice(...a),
-  }))
-);
+// export const useCartStore = create<CartSlice>()(
+//   immer((...a) => ({
+//     ...createCartSlice(...a),
+//   }))
+// );

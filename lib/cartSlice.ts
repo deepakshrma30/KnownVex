@@ -15,12 +15,12 @@ export type CartSlice=CartItems & CartActions
 export const createCartSlice:StateCreator<CartSlice,[["zustand/immer", never]],[],CartSlice>=(set,get)=>({
     ...initialState,
     addCart:async(cartItem:addCartProps)=>{
-        const apiAdd=useAddCart();
-        apiAdd.mutate(cartItem);
+        // const apiAdd=useAddCart();
+        // apiAdd.mutate(cartItem);
     },
     getCart:async()=>{
-        const result =useQuery({queryKey:["CART"],queryFn:getCartItems}) 
-        return result  
+        // const result =useQuery({queryKey:["CART"],queryFn:getCartItems}) 
+        // return result  
     },
     deleteCart:async(id:string)=>{
 

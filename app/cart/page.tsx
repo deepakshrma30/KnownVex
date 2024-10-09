@@ -9,7 +9,7 @@ import {
   CardFooter,
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-// import { useCartStore } from "@/lib/store";
+import { useCartStore } from "@/lib/store";
 import { getCartItems } from "@/services/api";
 import { useCartItemDelete } from "@/services/mutation";
 import { CartResponse, PlanName, PlanType } from "@/types/types";

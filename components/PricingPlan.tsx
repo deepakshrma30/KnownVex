@@ -8,9 +8,9 @@ import {
   CardTitle,
 } from "./ui/card";
 import { Button } from "./ui/button";
-// import { useCartStore } from "@/lib/store";
+import { useCartStore } from "@/lib/store";
 import { useShallow } from "zustand/react/shallow";
-// import { useAddCart } from "@/services/mutation";
+import { useAddCart } from "@/services/mutation";
 import { addCartProps } from "@/types/types";
 
 function PricingPlanCard({
@@ -32,14 +32,14 @@ function PricingPlanCard({
   productName: string;
   planName: string;
 }) {
-  // const apiAdd = useAddCart();
+  const apiAdd = useAddCart();
   // const {addCart}=useCartStore(
   //   useShallow((state)=>{
   //     addCart:state.addCart
   //   })
   // )
   const handleClick = (cartItem: addCartProps) => {
-    // apiAdd.mutate(cartItem);
+    apiAdd.mutate(cartItem);
   };
   return (
     <Card className="w-full rounded-md ">

@@ -17,6 +17,8 @@ import { useQuery } from "@tanstack/react-query";
 import { current } from "immer";
 import { Minus, Plus, Trash2 } from "lucide-react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+
 import React, { useMemo, useState } from "react";
 
 const initialCartItems = [
@@ -44,6 +46,8 @@ const initialCartItems = [
 ];
 
 const CartScreen = () => {
+  const router=useRouter()
+
   const [cartItems, setCartItems] = useState(initialCartItems);
   const { data, isError, isLoading } = useQuery<CartResponse[]>({
     queryKey: ["CART"],
@@ -128,7 +132,7 @@ const CartScreen = () => {
             </div>
           </CardContent>
           <CardFooter>
-            <Button className="w-full">Proceed to Checkout</Button>
+            <Button className="w-full" onClick={()=>router.push("/checkout")}>Proceed to Checkout</Button>
           </CardFooter>
         </Card>
       </div>

@@ -39,6 +39,7 @@ import { useStore } from "@/lib/store";
 import { useShallow } from "zustand/react/shallow";
 import { login, verifyOtp } from "@/services/api";
 import { loginResponse } from "@/types/types";
+import { cookies } from "next/headers";
 
 const phoneUtil = PhoneNumberUtil.getInstance();
 
@@ -61,6 +62,7 @@ export default function AuthModal() {
       setUser(data)
       if(data.active){
         toast.success("Logged in")
+        
         handleLogin()
       }else{
         handleLogin()

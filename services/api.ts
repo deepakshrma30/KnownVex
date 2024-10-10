@@ -16,6 +16,7 @@ export const signUpUser = async (formData: SignUpFormData) => {
     phoneNumber: formData.phone,
   };
   const response = await axiosInstance.put("user/create", body);
+  
   return response.data;
 };
 

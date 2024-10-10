@@ -13,7 +13,7 @@ const Aboutus = () => {
       <div className="container flex justify-between space-x-16">
         <div className="flex-shrink-0">
           <Image
-            src={"/images/instructorImg.png"}
+            src={"/images/instructorImg.svg"}
             width={350}
             height={300}
             alt="instructor"

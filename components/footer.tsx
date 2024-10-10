@@ -17,7 +17,6 @@ const footerSections = [
     links: [
       { name: "Web Development",link : "/course/web" },
       { name: "Artifical Inteligence",link : "/course/ai" },
-      { name: "Devops",link : "/course/devops" },
       { name: "Finance",link : "/course/finance" },
     ],
   },

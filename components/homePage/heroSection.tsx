@@ -8,8 +8,8 @@ import ArcCarousel from "../arcCarousel";
 const HeroSection = () => {
   return (
     <div className="w-full py-2   container   ">
-      <div className="flex justify-evenly  gap-8 items-stretch">
-        <Image src="/images/rocket.svg" alt="rocket" width={300} height={100} />
+      <div className="flex justify-evenly  gap-8 items-stretch mb-28">
+        {/* <Image src="/images/rocket.svg" alt="rocket" width={300} height={100} /> */}
         <div className="text-center ">
           <h1 className="text-5xl font-black  mb-1">Bridging the Gap</h1>
           <h2 className="text-4xl font-black  mb-2">Between</h2>
@@ -22,7 +22,7 @@ const HeroSection = () => {
           />
         </div>
 
-        <Image src="/images/trophy.png" alt="rocket" width={300} height={100} />
+        {/* <Image src="/images/trophy.png" alt="rocket" width={300} height={100} /> */}
       </div>
       {/* <Carousel/> */}
       <div>

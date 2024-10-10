@@ -16,10 +16,10 @@ const cardData = [
   },
   {
     icon: <TabletSmartphone />,
-    title: "Android Development",
-    path: "/course/android",
+    title: "Java",
+    path: "/course/java",
     description:
-      "Android Development focuses on creating applications for Android devices using programming languages like Java and Kotlin. This course covers the fundamentals of Android Studio, UI/UX design, API integration, and deploying apps on the Google Play Store.",
+      "Java is a high-level, object-oriented programming language developed by Sun Microsystems in 1995 (now owned by Oracle). It is widely used for building scalable, platform-independent applications. Java follows the 'write once, run anywhere' (WORA) principle, meaning code written in Java can run on any device with a Java Virtual Machine (JVM).",
   },
   {
     icon: <img src="/images/ai-icon.svg" className="w-6"/>,

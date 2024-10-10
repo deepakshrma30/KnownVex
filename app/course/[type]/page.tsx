@@ -100,7 +100,7 @@ const CoursePage = ({ params }: { params: { type: string } }) => {
             <h3 className="text-lg font-bold">Delivery Mode</h3>
             <div className="text-sm flex gap-8">
               {data?.deliveryMode.map((mode: any) => (
-                <div key={mode.text} className="flex flex-col justify-center items-center">
+                <div key={mode.text} className="flex flex-col justify-center items-center gap-2">
                   <img className="w-16" src={mode.icon} alt="" />
                   <span>{mode.text}</span>
                 </div>

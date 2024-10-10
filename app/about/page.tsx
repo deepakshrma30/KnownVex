@@ -76,7 +76,7 @@ const About = () => {
         </div>
       </section>
 
-      <section className="container mt-4 py-12 px-4 sm:px-6 lg:px-8 ">
+      {/* <section className="container mt-4 py-12 px-4 sm:px-6 lg:px-8 ">
         <div className="text-center mb-12">
           <h2 className="text-lg font-semibold text-purple-600 mb-2">
             GREAT TEAM MEMBERS
@@ -92,7 +92,6 @@ const About = () => {
           <CarouselContent>
             {Array.from({ length: 5 }).map((_, index) => (
               <CarouselItem key={index} className="sm:basis-1/2 lg:basis-1/3">
-                {/* <div className="p-1"> */}
                   <Card>
                     <CardHeader>
 
@@ -117,14 +116,13 @@ const About = () => {
                       </div>
                     </CardFooter>
                   </Card>
-                {/* </div> */}
               </CarouselItem>
             ))}
           </CarouselContent>
           <CarouselPrevious />
           <CarouselNext />
         </Carousel>
-      </section>
+      </section> */}
       <Partners/>
     </>
   );

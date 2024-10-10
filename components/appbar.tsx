@@ -27,10 +27,10 @@ import { useRouter } from "next/navigation";
 
 const NAV_ITEMS = [
   {
-    label: "Knowvex",
+    label: "/images/knowvexLogo2.0.svg",
     href: "/",
     className: "text-primary font-black",
-    type: "link",
+    type: "linkImg",
   },
   {
     label: "Courses",
@@ -124,7 +124,17 @@ const AppBar = () => {
       <div className="container flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
       <div className="flex items-center gap-10">
       {NAV_ITEMS.map((item:any, index) => {
-        if (item.type === "link") {
+        if (item.type === "linkImg") {
+          return (
+            <Link
+              key={index}
+              href={item.href}
+              className={`${item.className} hover:text-primary text-muted-foreground`}
+            >
+              <img style={{height:'3rem'}} src={item.label} alt="Logo" />
+            </Link>
+          );
+        } else if (item.type === "link") {
           return (
             <Link
               key={index}

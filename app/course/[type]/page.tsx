@@ -54,7 +54,6 @@ const CoursePage = ({ params }: { params: { type: string } }) => {
         <div className="text-center md:text-left  md:w-1/2 space-y-6">
           <TypewriterEffectSmooth words={data.words} />
           {/* Elevate Your Skills with Innovative Web Development Training */}
-
           <h2 className="text-2xl font-semibold">
             Ready To Kickstart Your Journey In{" "}
             <span className={data.words[0].className}>

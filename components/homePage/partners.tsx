@@ -20,21 +20,23 @@ const marquee = [
 ];
 const Partners = () => {
   return (
-    <section className="py-16">
+    <section className="py-8 xl:py-16">
       <div className="container mx-auto text-center">
         <Reveal>
-          <h2 className="text-purple-600 text-lg font-semibold">
+          <h2 className="text-purple-600 text-base xl:text-lg font-semibold">
             GREAT PARTNERS
           </h2>
         </Reveal>
         <Reveal>
-          <h1 className="text-4xl font-black mt-2 ">
+          <h1 className="text-xl xl:text-4xl font-black mt-2 ">
             COLLABARATIONS & PARTNERSHIP
           </h1>
         </Reveal>
-        <div className="container h-48 flex  justify-center items-center   mx-auto overflow-x-hidden">
+        <Reveal>
+        <div className="container h-24 xl:h-48 flex  justify-center items-center   mx-auto overflow-x-hidden">
           <Marquee marquee={marquee} />
         </div>
+        </Reveal>
       </div>
     </section>
   );

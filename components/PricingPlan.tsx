@@ -44,14 +44,14 @@ function PricingPlanCard({
   return (
     <Card className="w-full rounded-md ">
       <CardHeader className="flex items-center justify-center rounded-md bg-purple-500 text-white">
-        <CardTitle className="text-2xl font-bold scroll-m-20 ">
+        <CardTitle className="text-xl lg:text-2xl font-bold scroll-m-20 ">
           {title}
         </CardTitle>
         {/* <CardDescription className="text-white">{description}</CardDescription> */}
       </CardHeader>
       <CardContent className="flex justify-center flex-col items-center mt-2">
         <div className="mb-6 text-center">
-          <span className="text-4xl font-bold">
+          <span className="text-2xl lg:text-4xl font-bold">
             {parseFloat(originalPrice.replace(/,/g, "")).toLocaleString(
               "en-IN",
               {
@@ -73,12 +73,12 @@ function PricingPlanCard({
                 maximumFractionDigits: 0,
               })}
             </span>
-            <span className="ml-2 text-green-500 font-semibold">
+            <span className="ml-2 text-xs lg:text-sm text-green-500 font-semibold">
               Save {calculateDiscount(price, originalPrice)}
             </span>
           </div>
         </div>
-        <ul className="grid gap-4 text-sm">
+        <ul className="grid gap-4 text-xs lg:text-sm">
           {features.map((feature, index) => (
             <FeatureItem key={index} included={feature.included}>
               {feature.name}

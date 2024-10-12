@@ -15,11 +15,11 @@ const cardData = [
       "Web development involves building and maintaining websites and web applications. This course covers front-end and back-end development, using technologies like HTML, CSS, JavaScript, and frameworks such as React and Node.js to create responsive and dynamic web experiences.",
   },
   {
-    icon: <TabletSmartphone />,
-    title: "Android Development",
-    path: "/course/android",
+    icon: <TabletSmartphone className="w-6 h-6"/>,
+    title: "Java",
+    path: "/course/java",
     description:
-      "Android Development focuses on creating applications for Android devices using programming languages like Java and Kotlin. This course covers the fundamentals of Android Studio, UI/UX design, API integration, and deploying apps on the Google Play Store.",
+      "Java is a high-level, object-oriented programming language developed by Sun Microsystems in 1995 (now owned by Oracle). It is widely used for building scalable, platform-independent applications. Java follows the 'write once, run anywhere' (WORA) principle, meaning code written in Java can run on any device with a Java Virtual Machine (JVM).",
   },
   {
     icon: <img src="/images/ai-icon.svg" className="w-6"/>,
@@ -29,7 +29,7 @@ const cardData = [
       "Artificial Intelligence (AI) is the study of creating intelligent agents that can perform tasks that typically require human intelligence. This course includes topics such as machine learning, deep learning, natural language processing, and computer vision, providing practical insights into building AI-driven solutions.",
   },
   {
-    icon: <Home />,
+    icon: <Home className="w-6 h-6"/>,
     title: "Human Resources",
     path: "/course/hr",
     description:
@@ -54,20 +54,20 @@ const Cards = () => {
   };
   return (
     <div>
-      <section className="py-14">
-        <div className="container mx-auto text-center">
+      <section className="py-8 xl:py-14">
+        <div className="container px-4 mx-auto text-center">
           <Reveal>
-            <h2 className="text-purple-600 text-lg font-semibold">
+            <h2 className="text-purple-600 text-base xl:text-lg font-semibold">
               OUR PROGRAMS
             </h2>
           </Reveal>
           <Reveal>
-            <h1 className="text-4xl font-black mt-2 ">
+            <h1 className="text-xl xl:text-4xl font-black mt-2">
               WHAT STYLE OF PROGRAMS
             </h1>
           </Reveal>
           <Reveal>
-            <h1 className="text-4xl font-black mt-2  mb-12">DO WE OFFER ?</h1>
+            <h1 className="text-xl xl:text-4xl font-black mt-2 mb-6 xl:mb-12">DO WE OFFER ?</h1>
           </Reveal>
           <Reveal>
             <div className="flex flex-wrap justify-center gap-6">

@@ -16,7 +16,7 @@ export default function Home() {
       <Banner/>
       <Partners/>
       <Accordian/>
-      <OurServices />
+      {/* <OurServices /> */}
     </main>
   );
 }

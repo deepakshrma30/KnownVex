@@ -41,8 +41,9 @@ export default function RootLayout({
         > */}
         <ProviderQuery>
           <CounterStoreProvider>
-            <AppBar />
-
+            <div className="hidden lg:block">
+              <AppBar />
+            </div>
             {children}
             <Toaster richColors/>
             <AuthModal />

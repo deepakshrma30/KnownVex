@@ -68,8 +68,13 @@
   }
 }
 
+html,body{
+  width: 100vw;
+  overflow-x: hidden;
+}
+
 .banner-3{
-  background-image: url('/images/banner3.svg');
+  background-image: url('/images/banner3.0.svg');
 }
 .qna{
   background-image: url('/images/banner4.svg');

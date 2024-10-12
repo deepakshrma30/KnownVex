@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link";
-import React, { useEffect } from "react";
+import Link, { LinkProps } from "next/link";
+import React, { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 
 import {
@@ -13,17 +13,36 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { ChevronDown, LogOut, ShoppingBasketIcon, UserRound } from "lucide-react";
+import {
+  ChevronDown,
+  LogIn,
+  LogOut,
+  LogOutIcon,
+  Menu,
+  ShoppingBasketIcon,
+  UserRound,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
-
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useCounterStore } from "@/provider/counterProvider";
 import { useShallow } from "zustand/react/shallow";
 import { useStore } from "@/lib/store";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { useRouter } from "next/navigation";
+import { cn } from "@/lib/utils";
+import { ScrollArea } from "./ui/scroll-area";
+import { docsConfig } from "@/config/docs";
+import Image from "next/image";
 
-const NAV_ITEMS = [
+type NavItem = {
+  label: string;
+  href?: string;
+  className?: string;
+  type: "link" | "linkImg" | "dropdown" | "submenu";
+  subItems?: NavItem[];
+};
+const NAV_ITEMS: NavItem[] = [
   {
     label: "/images/knowvexLogo2.0.svg",
     href: "/",
@@ -58,7 +77,10 @@ const NAV_ITEMS = [
         label: "MEC",
         type: "submenu",
         subItems: [
-          { label: "Hybrid & Electric Vehicles", href: "/course/hybridElectricVehicle" },
+          {
+            label: "Hybrid & Electric Vehicles",
+            href: "/course/hybridElectricVehicle",
+          },
           { label: "AutoCAD", href: "/course/autocad" },
         ],
       },
@@ -104,6 +126,8 @@ const NAV_ITEMS = [
 
 const AppBar = () => {
   const { setTheme } = useTheme();
+  const [isOpen, setIsOpen] = useState(false);
+  const [expandedItems, setExpandedItems] = useState<string[]>([]);
   const router = useRouter();
   const { handleLogin, open } = useCounterStore((state) => state);
   const { name, active } = useStore(
@@ -117,10 +141,113 @@ const AppBar = () => {
     useStore.persist.rehydrate();
   }, []);
 
+  function NavItems({
+    items,
+    level = 0,
+  }: {
+    items: NavItem[];
+    level?: number;
+  }) {
+    const [expandedItems, setExpandedItems] = useState<string[]>([]);
+
+    const toggleSubmenu = (label: string) => {
+      setExpandedItems((prev) =>
+        prev.includes(label)
+          ? prev.filter((i) => i !== label)
+          : [...prev, label]
+      );
+    };
+
+    return (
+      <ul className={`space-y-1 ${level > 0 ? "ml-4" : ""}`}>
+        {items.map((item) => (
+          <li key={item.label}>
+            {item.type === "linkImg" ? (
+              <Link href={item.href || "/"} className={item.className}>
+                <Image
+                  src={item.label}
+                  alt="Knowvex Logo"
+                  width={120}
+                  height={40}
+                  className="h-10 w-auto"
+                />
+              </Link>
+            ) : item.type === "link" ? (
+              <Link
+                href={item.href || "#"}
+                className={`block py-2 px-4 text-sm hover:bg-accent rounded-md ${item.className}`}
+              >
+                {item.label}
+              </Link>
+            ) : (
+              <div>
+                <Button
+                  variant="ghost"
+                  className={`w-full justify-between ${item.className}`}
+                  onClick={() => toggleSubmenu(item.label)}
+                >
+                  {item.label}
+                  <ChevronDown
+                    className={`h-4 w-4 transition-transform ${
+                      expandedItems.includes(item.label) ? "rotate-180" : ""
+                    }`}
+                  />
+                </Button>
+                {expandedItems.includes(item.label) && item.subItems && (
+                  <NavItems items={item.subItems} level={level + 1} />
+                )}
+              </div>
+            )}
+          </li>
+        ))}
+      </ul>
+    );
+  }
+
+  const MobileNav = () => (
+    <Sheet open={isOpen} onOpenChange={setIsOpen}>
+      <SheetContent side="left" className="w-[300px] sm:w-[400px]">
+        <nav className="flex flex-col h-full">
+          <ScrollArea className="flex-grow py-4">
+            <NavItems items={NAV_ITEMS} />
+          </ScrollArea>
+          <div className="p-4 border-t">
+            {active ? (
+              <Button
+                className="w-full"
+                onClick={() => {
+                  // setIsOpen(!isOpen);
+                  // handleLogin();
+                }}
+                variant={"destructive"}
+              >
+                <LogOutIcon className="mr-2 h-4 w-4" />
+                Logout
+              </Button>
+            ) : (
+              <Button
+                className="w-full"
+                onClick={() => {
+                  setIsOpen(!isOpen);
+                  handleLogin();
+                }}
+                
+              >
+                <LogIn className="mr-2 h-4 w-4" />
+                Login
+              </Button>
+            )}
+          </div>
+        </nav>
+      </SheetContent>
+    </Sheet>
+  );
+
   return (
     <header className="sticky top-0 z-40 w-full border-b bg-white text-base">
-      <div className="container flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
+      <div className="flex container  h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
         <div className="flex items-center gap-10">
+          {/* Logo */}
           {NAV_ITEMS.map((item: any, index) => {
             if (item.type === "linkImg") {
               return (
@@ -132,11 +259,19 @@ const AppBar = () => {
                   <img style={{ height: "3rem" }} src={item.label} alt="Logo" />
                 </Link>
               );
-            } else if (item.type === "link") {
+            }
+            return null;
+          })}
+        </div>
+        <div className="hidden lg:flex items-center space-x-8 justify-start w-full ml-8">
+          {NAV_ITEMS.filter(
+            (item) => item.type === "link" || item.type === "dropdown"
+          ).map((item, index) => {
+            if (item.type === "link") {
               return (
                 <Link
                   key={index}
-                  href={item.href}
+                  href={item?.href || ""}
                   className={`${item.className} relative hover:text-primary text-zinc-700 group`}
                 >
                   {item.label}
@@ -147,7 +282,9 @@ const AppBar = () => {
               return (
                 <DropdownMenu key={index}>
                   <DropdownMenuTrigger asChild>
-                    <div className={`${item.className} group flex items-center cursor-pointer`}>
+                    <div
+                      className={`${item.className} group flex items-center cursor-pointer`}
+                    >
                       <span className="relative group-hover:text-primary text-zinc-700">
                         {item.label}
                         <span className="absolute bottom-0 left-1/2 h-[2px] w-0 bg-primary transition-all duration-500 ease-in-out group-hover:w-full group-hover:left-0"></span>
@@ -156,7 +293,7 @@ const AppBar = () => {
                     </div>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent className="w-56">
-                    {item.subItems.map((subItem: any, subIndex: any) => {
+                    {item?.subItems?.map((subItem: any, subIndex: any) => {
                       if (subItem.type === "submenu") {
                         return (
                           <DropdownMenuSub key={subIndex}>
@@ -166,10 +303,7 @@ const AppBar = () => {
                             <DropdownMenuSubContent className="w-48">
                               {subItem.subItems.map(
                                 (innerItem: any, innerIndex: any) => (
-                                  <Link
-                                    key={innerIndex}
-                                    href={innerItem.href}
-                                  >
+                                  <Link key={innerIndex} href={innerItem.href}>
                                     <DropdownMenuItem>
                                       {innerItem.label}
                                     </DropdownMenuItem>
@@ -190,11 +324,12 @@ const AppBar = () => {
                 </DropdownMenu>
               );
             }
+
             return null;
           })}
         </div>
 
-        <div className="flex items-center space-x-4">
+        <div className="hidden lg:flex items-center space-x-4">
           {active ? (
             <Popover>
               <PopoverTrigger asChild>
@@ -236,9 +371,42 @@ const AppBar = () => {
             </Button>
           )}
         </div>
+        <div>
+          <Button variant="ghost" onClick={() => setIsOpen(!isOpen)}>
+            <Menu className="h-6 w-6" />
+          </Button>
+        </div>
       </div>
+      <MobileNav />
     </header>
   );
 };
+interface MobileLinkProps extends LinkProps {
+  onOpenChange?: (open: boolean) => void;
+  children: React.ReactNode;
+  className?: string;
+}
 
+function MobileLink({
+  href,
+  onOpenChange,
+  className,
+  children,
+  ...props
+}: MobileLinkProps) {
+  const router = useRouter();
+  return (
+    <Link
+      href={href}
+      onClick={() => {
+        router.push(href.toString());
+        onOpenChange?.(false);
+      }}
+      className={cn(className)}
+      {...props}
+    >
+      {children}
+    </Link>
+  );
+}
 export default AppBar;

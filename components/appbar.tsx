@@ -58,19 +58,19 @@ const NAV_ITEMS: NavItem[] = [
         label: "Computer Science",
         type: "submenu",
         subItems: [
-          { label: "Machine Learning", href: "/course/ml" },
-          { label: "Artificial Intelligence", href: "/course/ai" },
-          { label: "Data Science", href: "/course/dataScience" },
-          { label: "Web Development", href: "/course/web" },
-          { label: "Cyber Security", href: "/course/cyber" },
+          { label: "Machine Learning", href: "/course/ml", type: "link" },
+          { label: "Artificial Intelligence", href: "/course/ai", type: "link" },
+          { label: "Data Science", href: "/course/dataScience", type: "link" },
+          { label: "Web Development", href: "/course/web", type: "link" },
+          { label: "Cyber Security", href: "/course/cyber", type: "link" },
         ],
       },
       {
         label: "ECE",
         type: "submenu",
         subItems: [
-          { label: "IoT & Robotics", href: "/course/iot" },
-          { label: "Cloud Computing", href: "/course/cloudComputing" },
+          { label: "IoT & Robotics", href: "/course/iot", type: "link" },
+          { label: "Cloud Computing", href: "/course/cloudComputing", type: "link" },
         ],
       },
       {
@@ -80,26 +80,27 @@ const NAV_ITEMS: NavItem[] = [
           {
             label: "Hybrid & Electric Vehicles",
             href: "/course/hybridElectricVehicle",
+            type: "link",
           },
-          { label: "AutoCAD", href: "/course/autocad" },
+          { label: "AutoCAD", href: "/course/autocad", type: "link" },
         ],
       },
       {
         label: "Management",
         type: "submenu",
         subItems: [
-          { label: "Digital Marketing", href: "/course/marketing" },
-          { label: "Finance", href: "/course/finance" },
-          { label: "Human Resource", href: "/course/hr" },
+          { label: "Digital Marketing", href: "/course/marketing", type: "link" },
+          { label: "Finance", href: "/course/finance", type: "link" },
+          { label: "Human Resource", href: "/course/hr", type: "link" },
         ],
       },
       {
         label: "Programming Language",
         type: "submenu",
         subItems: [
-          { label: "C & C++", href: "/course/cplus" },
-          { label: "Python", href: "/course/python" },
-          { label: "Java", href: "/course/java" },
+          { label: "C & C++", href: "/course/cplus", type: "link" },
+          { label: "Python", href: "/course/python", type: "link" },
+          { label: "Java", href: "/course/java", type: "link" },
         ],
       },
     ],
@@ -122,7 +123,7 @@ const NAV_ITEMS: NavItem[] = [
     className: "text-base font-medium",
     type: "link",
   },
-];
+]
 
 const AppBar = () => {
   const { setTheme } = useTheme();
@@ -371,7 +372,7 @@ const AppBar = () => {
             </Button>
           )}
         </div>
-        <div>
+        <div className="lg:hidden block">
           <Button variant="ghost" onClick={() => setIsOpen(!isOpen)}>
             <Menu className="h-6 w-6" />
           </Button>
@@ -381,32 +382,5 @@ const AppBar = () => {
     </header>
   );
 };
-interface MobileLinkProps extends LinkProps {
-  onOpenChange?: (open: boolean) => void;
-  children: React.ReactNode;
-  className?: string;
-}
 
-function MobileLink({
-  href,
-  onOpenChange,
-  className,
-  children,
-  ...props
-}: MobileLinkProps) {
-  const router = useRouter();
-  return (
-    <Link
-      href={href}
-      onClick={() => {
-        router.push(href.toString());
-        onOpenChange?.(false);
-      }}
-      className={cn(className)}
-      {...props}
-    >
-      {children}
-    </Link>
-  );
-}
 export default AppBar;

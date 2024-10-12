@@ -14,15 +14,15 @@ const About = () => {
   return (
     <>
       <div className="max-w-7xl mx-auto mt-8 p-4">
-        <h1 className="text-5xl md:text-6xl font-bold text-purple-400 mb-4">
+        <h1 className="text-2xl md:text-3xl font-bold text-purple-400 mb-4">
           About Us
         </h1>
         <div className="flex flex-col md:flex-row gap-6">
           <div className="md:w-2/3 space-y-4">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 leading-tight">
+            <h2 className="text-xl md:text-3xl font-bold text-gray-900 leading-tight">
               Unlocking Potential, Building Skills: Your Journey To Success
             </h2>
-            <p className="text-sm md:text-base text-gray-700">
+            <p className="text-xs lg:text-sm md:text-base text-gray-700">
               Knowvex is an edtech platform that helps students with
               internships, professional training programs, career guidance, and
               mentorship. Our aim is to bridge the gap between formal education
@@ -57,8 +57,8 @@ const About = () => {
             />
           </div>
           <div className="md:w-1/2 md:pl-8">
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">OUR MISSION</h2>
-            <p className="text-sm sm:text-base leading-relaxed">
+            <h2 className="text-2xl sm:text-4xl font-bold mb-4">OUR MISSION</h2>
+            <p className="text-xs lg:text-sm sm:text-base leading-relaxed">
               At Knowvex, We Believe Everyone Should Have The Opportunity To
               Create Progress Through Technology And Develop The Skills Of
               Tomorrow. With Assessments, Learning Paths And Courses Authored By

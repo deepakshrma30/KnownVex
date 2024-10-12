@@ -34,10 +34,10 @@ const footerSections = [
 const Footer = () => {
   return (
     <footer
-      className="w-full bg-cover bg-center bg-no-repeat h-[37rem] mt-32 relative"
+      className="w-full bg-cover bg-center bg-no-repeat h-auto md:h-[37rem] mt-2 lg:mt-32 relative"
       style={{ backgroundImage: "url('/images/Footer 17 Dark.svg')" }}
     >
-      <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3/5 bg-gradient-to-r from-pink-500 to-teal-400 p-8 rounded-xl flex justify-between">
+      <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3/5 bg-gradient-to-r from-pink-500 to-teal-400 p-8 rounded-xl hidden lg:flex justify-between">
         <span className="text-2xl font-extrabold text-white">
           Start Your Journey to Career Excellence Here
         </span>
@@ -51,14 +51,14 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className="text-white pt-24 px-36">
-        <div className="flex gap-48">
+      <div className="text-white lg:pt-24 pt-4 px-6 lg:px-36">
+        <div className="flex gap-14 gap-y-4 lg:gap-y-4 lg:gap-48 flex-wrap">
           {footerSections.map((section, index) => (
             <div key={index}>
-              <span className="text-xl font-extrabold mb-1 inline-block">
+              <span className="text-base font-extrabold mb-1 inline-block">
                 {section.heading}
               </span>
-              <ul className="text-sm font-light list-disc pl-4">
+              <ul className="text-xs font-light list-disc pl-4">
                 {section.links.map((link, linkIndex) => (
                   <Link key={index} href={link.link}>
                   <li
@@ -73,7 +73,7 @@ const Footer = () => {
             </div>
           ))}
         </div>
-        <div className="h-1 bg-white opacity-50 my-16"></div>
+        <div className="h-1 bg-white opacity-50 my-10 lg:my-16"></div>
         <div className="flex flex-col items-center">
           <div className="flex gap-4 mb-3">
             <img
@@ -93,7 +93,7 @@ const Footer = () => {
               alt="Facebook"
             />
           </div>
-          <div className="text-center text-sm">
+          <div className="text-center text-xs lg:text:sm">
             <p>© 2019 Lift Media Online S.L.</p>
             <p>Ronda Sant Pere 52, 08010 Barcelona,</p>
             <p>
@@ -101,10 +101,10 @@ const Footer = () => {
               Folio 37, Hoja 525271.
             </p>
           </div>
-          <div className="flex gap-2 items-center self-end mt-8 font-medium">
+          <div className="flex gap-2 items-center self-end mt-8 font-medium text-xs lg:text:sm">
             <span>100% Safe and secure Payments with</span>
             <img
-              className="p-1 bg-white"
+              className="p-1 bg-white w-20 lg:w-auto"
               src="/images/razerPay.svg"
               alt="RazerPay"
             />

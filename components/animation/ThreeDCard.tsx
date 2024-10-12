@@ -44,7 +44,7 @@ const ThreeDCard = ({ icon, index,title, description,path }: Props) => {
   return (
     <Card
       className={cn(
-        "max-w-[316px] p-2 rounded-lg shadow-2xl hover:cursor-pointer transition-colors duration-300",
+        "min-w-[80vw] grow md:min-w-0 md:max-w-[316px] p-2 rounded-lg shadow-2xl hover:cursor-pointer transition-colors duration-300 h-fit",
         {
           "mt-6": index % 2 !== 0,
           "bg-[#807AF9] text-white": isHovered, 
@@ -61,7 +61,7 @@ const ThreeDCard = ({ icon, index,title, description,path }: Props) => {
       style={mousePosition.x || mousePosition.y ? transformStyle : {}}
     >
       <CardHeader>
-        <div className="flex items-center justify-start mb-4">
+        <div className="flex items-center justify-start mb-1 xl:mb-2">
           <span
             className={cn(
               "inline-block p-3 rounded-full text-purple-500 transition-colors duration-300",
@@ -74,10 +74,10 @@ const ThreeDCard = ({ icon, index,title, description,path }: Props) => {
             {icon}
           </span>
         </div>
-        <CardTitle className="text-xl font-bold text-left">{title}</CardTitle>
+        <CardTitle className="text-xl font-bold text-left text-xs xl:text-sm">{title}</CardTitle>
       </CardHeader>
       <CardContent>
-        <p className="text-left">{description}</p>
+        <p className="text-left text-xs xl:text-sm">{description}</p>
       </CardContent>
     </Card>
   );

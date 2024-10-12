@@ -29,9 +29,9 @@ const data = [
 const Accordian = () => {
   const [val, setVal] = useState<string>(data[0]?.question);
   return (
-    <section className="w-full mt-2 mb-4 h-[400px]">
-      <div className="min-w-fit qna   h-full bg-no-repeat bg-center bg-cover flex items-center justify-end overflow-hidden overflow-y-auto">
-        <div className="bg-black p-4 w-[50%] max-h-[400px] text-white mr-16 rounded-lg overflow-hidden overflow-y-auto scrollbar-thin">
+    <section className="w-full mt-2 mb-4 h-auto">
+      <div className="min-w-fit qna bg-no-repeat bg-center bg-cover flex items-center justify-center lg:justify-end overflow-hidden text-2xl lg:text-sm">
+        <div className="bg-black p-4 w-full lg:w-[50%] text-white lg:mr-16 rounded-lg overflow-hidden m-4 xl:m-12">
           <h2 className="text-lg font-bold mb-4 flex items-center gap-2">
             <MessageCircleQuestion size={24} />
             FAQ&apos;s
@@ -54,8 +54,8 @@ const Accordian = () => {
                     setVal(item?.question);
                   }}
                 >
-                  <AccordionTrigger>{item?.question}</AccordionTrigger>
-                  <AccordionContent className="text-left font-normal break-words max-w-[800px]   overflow-hidden  overflow-y-auto">
+                  <AccordionTrigger className="text-left text-sm xl:text-base">{item?.question}</AccordionTrigger>
+                  <AccordionContent className="text-left font-normal break-words max-w-[800px] overflow-hidden text-xs xl:text-sm">
                     {item?.answer}
                   </AccordionContent>
                 </AccordionItem>

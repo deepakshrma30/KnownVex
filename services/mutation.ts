@@ -7,16 +7,7 @@ import { useRouter } from "next/navigation";
 export function useSignUp() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: signUpUser,
-    // onSuccess: (data:any) => {
-    //   console.log('Signup successful:', data);
-
-    // },
-
-    // onError: (error: any) => {
-    //   console.log('Error signing up:', error?.response?.data);
-
-    // },
+    mutationFn: signUpUser
   });
 }
 
@@ -35,8 +26,13 @@ export function useAddCart() {
 
       queryClient.invalidateQueries({ queryKey: ["CART"] });
     },
-    onError(error, variable, context) {
-      toast.error(error?.message);
+    onError(error:any, variable, context) {
+      console.log(error)
+      if(error?.status === 403){
+        toast.error("Session Expired Login Again")
+      }else{
+        toast.error(error.response.data);
+      }
     },
   });
 }
@@ -45,8 +41,15 @@ export function useCartItemDelete() {
   return useMutation({
     mutationFn: deleteCartItem,
     onSuccess: () => {
-      toast.error("Item deleted successfully")
+      toast.success("Item deleted successfully")
       queryClient.invalidateQueries({ queryKey: ["CART"] });
+    },
+    onError(error:any, variable, context) {
+      if(error?.status === 403){
+        toast.error("Session Expired Login Again")
+      }else{
+        toast.error(error.response.data);
+      }
     },
   });
 }

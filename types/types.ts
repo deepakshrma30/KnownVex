@@ -80,7 +80,4 @@ export const PlanName = {
   C_CPLUSPLUS: "C & C++",
   PYTHON: "Python",
   JAVA: "Java",
-  ANDROID: "Android Development",
-  DEVOPS: "DevOps",
-  MARKETING: "Marketing"
 };

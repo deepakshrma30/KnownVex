@@ -14,7 +14,7 @@ export const useStore = create<Store>()(
         })),
         {
           name: "user-storage", // Key in localStorage
-          storage: createJSONStorage(() => localStorage), // Use localStorage for persistence
+          storage: createJSONStorage(() => sessionStorage), // Use localStorage for persistence
           skipHydration: true, // Optional: skip hydration
         }
       ),

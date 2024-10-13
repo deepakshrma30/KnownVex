@@ -131,10 +131,11 @@ const AppBar = () => {
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
   const router = useRouter();
   const { handleLogin, open } = useCounterStore((state) => state);
-  const { name, active } = useStore(
+  const { name, active,reset } = useStore(
     useShallow((state) => ({
       name: state.name,
       active: state.active,
+      reset: state.reset
     }))
   );
 
@@ -204,6 +205,10 @@ const AppBar = () => {
       </ul>
     );
   }
+  
+  const handleLogout = () => {
+    reset()
+  }
 
   const MobileNav = () => (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -216,10 +221,7 @@ const AppBar = () => {
             {active ? (
               <Button
                 className="w-full"
-                onClick={() => {
-                  // setIsOpen(!isOpen);
-                  // handleLogin();
-                }}
+                onClick={handleLogout}
                 variant={"destructive"}
               >
                 <LogOutIcon className="mr-2 h-4 w-4" />
@@ -343,7 +345,7 @@ const AppBar = () => {
               </PopoverTrigger>
               <PopoverContent className="w-36">
                 <div className="grid gap-4">
-                  <div className="font-medium text-center">{name}</div>
+                  <div className="font-medium text-center capitalize">{name}</div>
                   <div className="grid gap-2">
                     <Button
                       variant="ghost"
@@ -358,6 +360,7 @@ const AppBar = () => {
                     <Button
                       variant="ghost"
                       className="w-full justify-start outline-none"
+                      onClick={handleLogout}
                     >
                       <LogOut className="mr-2 h-4 w-4" />
                       Logout
@@ -373,6 +376,11 @@ const AppBar = () => {
           )}
         </div>
         <div className="lg:hidden block">
+          {active && <Button variant="ghost">
+          <Link href="/cart">
+                <ShoppingBasketIcon className="h-6 w-6"/>
+          </Link>
+          </Button>}
           <Button variant="ghost" onClick={() => setIsOpen(!isOpen)}>
             <Menu className="h-6 w-6" />
           </Button>

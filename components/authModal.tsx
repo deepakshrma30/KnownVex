@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -44,8 +44,6 @@ import { cookies } from "next/headers";
 const phoneUtil = PhoneNumberUtil.getInstance();
 
 export default function AuthModal() {
-
-
   const { open, handleLogin,handleOTPModal } = useCounterStore((state) => state);
   const { setUser,setEmail,setActive } = useStore(
     useShallow((state) => ({
@@ -62,19 +60,22 @@ export default function AuthModal() {
       setUser(data)
       if(data.active){
         toast.success("Logged in")
-        
         handleLogin()
       }else{
         handleLogin()
         handleOTPModal()
-        // setActive(data.active)
       }
     },
-    onError(error, variables, context) {
+    onError(error:any, variables, context) {
       setIsLoading(false)
-      toast.error(error.message)
+      toast.error(error?.response?.data || error.message)
     },
   })
+
+  useEffect(() => {
+    signUpForm.reset();
+    loginForm.reset();
+  },[open])
 
   const signup = useSignUp();
   const [isLoading, setIsLoading] = useState(false);
@@ -174,10 +175,8 @@ export default function AuthModal() {
   });
 
   function onSubmit(values: z.infer<typeof loginFormSchema>) {
-    console.log(values);
     setIsLoading(true);
     loginMutation.mutate(values)
-
   }
 
   function onSubmitSignUp(values: z.infer<typeof SignUpFormSchema>) {
@@ -195,9 +194,8 @@ export default function AuthModal() {
 
       },
       onError: (error: any) => {
-        console.log('Error signing up:', error?.response?.data);
         setIsLoading(false);
-        toast.error("Error signup",{closeButton:true})
+        toast.error(error?.response?.data || error.message)
       },
     });
 

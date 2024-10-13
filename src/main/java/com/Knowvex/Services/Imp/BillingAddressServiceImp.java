@@ -43,8 +43,8 @@ public class BillingAddressServiceImp implements BillingAddressService {
         if (!address.getUser().equals(user)) {
             throw new IllegalArgumentException("You are not authorized to delete this address.");
         }
-
-        billingAddressRepository.delete(address);
+        address.setActive(false);
+        billingAddressRepository.save(address);
         return true;
     }
 
@@ -70,6 +70,6 @@ public class BillingAddressServiceImp implements BillingAddressService {
     @Override
     public List<BillingAddressModel> addresses() {
         UserModel user = jwtUtil.getAuthenticatedUser();
-        return billingAddressRepository.findAllByUser(user);
+        return billingAddressRepository.findAllByUserAndActive(user,true);
     }
 }

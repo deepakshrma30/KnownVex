@@ -17,6 +17,7 @@ public class CartController {
     private final CartService cartService;
 
     @PostMapping("/add")
+    @ResponseBody
     private boolean addToCart(@RequestBody CartModel cart){
         return cartService.addToCart(cart);
     }

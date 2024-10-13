@@ -45,6 +45,10 @@ public class BillingAddressModel {
     @Column
     boolean isDefault = false;
 
+    @Column
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    boolean active = true;
+
     @CreationTimestamp
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @Column(updatable = false)

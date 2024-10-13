@@ -2,6 +2,9 @@ package com.Knowvex.Configurations;
 
 import com.Knowvex.Filters.JwtAuthFilter;
 import com.Knowvex.Services.Imp.UserDetailServiceImp;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.info.Info;
+import io.swagger.v3.oas.annotations.servers.Server;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -55,14 +58,9 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth ->
                         auth.requestMatchers("/swagger-ui/**","v3/api-docs/**").permitAll()
-                                .requestMatchers("/**").permitAll()
-                                .requestMatchers("/user").hasAuthority("USER")
-                                .requestMatchers("/user/admin").hasAuthority("ADMIN")
                                 .requestMatchers("/user/**").permitAll()
-                                .requestMatchers("/cart/**").permitAll()
-                                .requestMatchers("/billing-addresses/**").permitAll()
-                                .requestMatchers("/queries/all").hasAuthority("ADMIN")
-                                .requestMatchers("/queries/**").permitAll()
+                                .requestMatchers("/user/admin","/queries/all","/order/all","/queries/update").hasAuthority("ADMIN")
+                                .requestMatchers("/queries/submit").permitAll()
                                 .anyRequest().authenticated()
                 )
                 .authenticationProvider(authProvider())

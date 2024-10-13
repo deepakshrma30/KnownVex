@@ -16,7 +16,4 @@ public enum ProductEnum {
     C_CPLUSPLUS, // C & C++
     PYTHON,
     JAVA,
-    ANDROID,
-    DEVOPS,
-    MARKETING,
 }

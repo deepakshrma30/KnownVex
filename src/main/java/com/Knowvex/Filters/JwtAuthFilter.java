@@ -28,6 +28,12 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        String path = request.getRequestURI();
+
+        if (path.contains("/user/") || path.contains("/swagger-ui/") || path.contains("/v3/api-docs/") || path.contains("/queries/submit")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
 
         String token = jwtUtil.extractToken(request);
         String username = null;

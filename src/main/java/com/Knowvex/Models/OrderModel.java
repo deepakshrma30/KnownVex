@@ -29,8 +29,15 @@ public class OrderModel {
     @Column
     private String items;
 
+    @Column
+    private String orderId;
+
     @Enumerated(EnumType.STRING)
     private OrderStatusEnum status;
+
+    @ManyToOne
+    @JoinColumn(name = "billing_address_id")
+    private BillingAddressModel billingAddress;
 
     @CreationTimestamp
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)

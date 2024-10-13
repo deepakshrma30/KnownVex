@@ -138,7 +138,7 @@ public class UserServiceImp implements UserService {
             String token = jwtUtil.generateToken(userModel.getEmail(),userModel.getId());
             Cookie cookie=new Cookie(AUTH_KEY,token);
             cookie.setPath("/knowvex");
-            cookie.setMaxAge(60 * 60);
+            cookie.setSecure(true);
             response.addCookie(cookie);
         }else{
             long otp = otpUtil.generateOtp(userModel.getEmail());

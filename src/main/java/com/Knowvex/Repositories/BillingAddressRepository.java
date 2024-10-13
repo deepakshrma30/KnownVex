@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface BillingAddressRepository extends JpaRepository<BillingAddressModel, UUID> {
-    List<BillingAddressModel> findAllByUser(UserModel user);
+    List<BillingAddressModel> findAllByUserAndActive(UserModel user,boolean isActive);
 
     @Modifying
     @Transactional

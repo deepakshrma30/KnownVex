@@ -189,7 +189,7 @@ const CoursePage = ({ params }: { params: { type: string } }) => {
       <Reveal>
         <section className="container mt-8 p-4">
           <div className="text-center">
-            <h3 className="scroll-m-20 text-base font-extrabold tracking-tight text-xl lg:text-4xl">
+            <h3 className="scroll-m-20  font-extrabold tracking-tight text-xl lg:text-4xl">
               Key Highlights of our{" "}
               <span className="text-purple-500">
                 {data.words.map((word: any) => word.text)?.join(" ")}
@@ -217,7 +217,7 @@ const CoursePage = ({ params }: { params: { type: string } }) => {
 
       <Reveal>
         <section className="container mt-8 p-4">
-          <h3 className="scroll-m-20 text-center text-base font-extrabold tracking-tight text-xl lg:text-4xl">
+          <h3 className="scroll-m-20 text-center  font-extrabold tracking-tight text-xl lg:text-4xl">
             Program Curriculum
           </h3>
           <Accordion type="single" collapsible className="flex flex-col mt-4 lg:mt-6">

@@ -4,9 +4,10 @@ import axios from "axios";
 import { toast } from "sonner";
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost/knowvex/",
+  baseURL: "http://3.91.144.249:9000/knowvex",
   headers: {
     "Content-Type": "application/json",
+      "Accept":"application/json, text/plain"
   },
 });
 
@@ -68,10 +69,10 @@ export const addCartItem = async ({ plan, product }: { plan: string; product: st
   };
 
   const response = await axiosInstance.post("/cart/add", body, {
-    // headers: {
-    //   "Auth-token":
-    //     "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiJiZDRlZTQyMy0yYmRlLTRlMjYtOGNlNi0xYjU0NjczMWFmNTciLCJzdWIiOiJhZG1pbjEyM0B5b3BtYWlsLmNvbSIsImlhdCI6MTcyODQxNTIyMiwiZXhwIjoxNzI4NDUxMjIyfQ.MpMyiF6C2M3Z-7M2sraO_S0pWY1gi8-CVErfi8TsYz0",
-    // },
+    headers: {
+      "Auth-token":
+        "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiJiZDRlZTQyMy0yYmRlLTRlMjYtOGNlNi0xYjU0NjczMWFmNTciLCJzdWIiOiJhZG1pbjEyM0B5b3BtYWlsLmNvbSIsImlhdCI6MTcyODQxNTIyMiwiZXhwIjoxNzI4NDUxMjIyfQ.MpMyiF6C2M3Z-7M2sraO_S0pWY1gi8-CVErfi8TsYz0",
+    },
   });
 
   return response?.data;
@@ -79,10 +80,10 @@ export const addCartItem = async ({ plan, product }: { plan: string; product: st
 
 export const deleteCartItem = async ({ id }: { id: string }) => {
   const response = await axiosInstance.delete("/cart/remove/" + id, {
-    // headers: {
-    //   "Auth-token":
-    //     "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiJiZDRlZTQyMy0yYmRlLTRlMjYtOGNlNi0xYjU0NjczMWFmNTciLCJzdWIiOiJhZG1pbjEyM0B5b3BtYWlsLmNvbSIsImlhdCI6MTcyODQxNTIyMiwiZXhwIjoxNzI4NDUxMjIyfQ.MpMyiF6C2M3Z-7M2sraO_S0pWY1gi8-CVErfi8TsYz0",
-    // },
+    headers: {
+      "Auth-token":
+        "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiJiZDRlZTQyMy0yYmRlLTRlMjYtOGNlNi0xYjU0NjczMWFmNTciLCJzdWIiOiJhZG1pbjEyM0B5b3BtYWlsLmNvbSIsImlhdCI6MTcyODQxNTIyMiwiZXhwIjoxNzI4NDUxMjIyfQ.MpMyiF6C2M3Z-7M2sraO_S0pWY1gi8-CVErfi8TsYz0",
+    },
   });
   return response;
 };

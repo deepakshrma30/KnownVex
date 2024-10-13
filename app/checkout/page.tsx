@@ -1,22 +1,21 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { CreditCard, Truck, Plus, Trash2 } from "lucide-react";
+import { CreditCard, Plus, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { useQuery } from "@tanstack/react-query";
 import { CartResponse, PlanName, PlanType } from "@/types/types";
-import { getCartItems, handleCheckout } from "@/services/api";
+import { getBillingAddress, getCartItems } from "@/services/api";
 import AddressDialog from "@/components/addressDialog";
-import { useRazorpay } from "react-razorpay";
 import { useStore } from "@/lib/store";
 import { useShallow } from "zustand/react/shallow";
 import { useRouter } from "next/navigation";
+import { useCheckoutMutation, useDeleteBillingAddress } from "@/services/mutation";
+import { toast } from "sonner";
 
 interface CartItem {
   id: number;
@@ -26,41 +25,18 @@ interface CartItem {
 }
 
 interface Address {
-  id: number;
+  id: string;
   name: string;
+  email: string;
   street: string;
   city: string;
   state: string;
   zipCode: string;
   country: string;
+  phoneNumber: string;
+  active: boolean;
+  default: boolean;
 }
-
-const cartItems: CartItem[] = [
-  { id: 1, name: "Vintage T-Shirt", price: 29.99, quantity: 2 },
-  { id: 2, name: "Denim Jeans", price: 59.99, quantity: 1 },
-  { id: 3, name: "Sneakers", price: 89.99, quantity: 1 },
-];
-
-const initialAddresses: Address[] = [
-  {
-    id: 1,
-    name: "John Doe",
-    street: "123 Main St",
-    city: "Anytown",
-    state: "CA",
-    zipCode: "12345",
-    country: "USA",
-  },
-  {
-    id: 2,
-    name: "Jane Smith",
-    street: "456 Elm St",
-    city: "Other City",
-    state: "NY",
-    zipCode: "67890",
-    country: "USA",
-  },
-];
 
 export default function Component() {
   const router = useRouter()
@@ -77,57 +53,44 @@ export default function Component() {
     }
   },[active])
 
-  const { Razorpay } = useRazorpay();
+
   const { data, isError, isLoading } = useQuery<CartResponse[]>({
     queryKey: ["CART"],
     queryFn: getCartItems,
-    staleTime: 60 * 1000,
+    staleTime: Infinity,
     refetchOnWindowFocus: false,
   });
-  const [open, setOpen] = useState<boolean>(false);
-  const [shippingMethod, setShippingMethod] = useState("standard");
-  const [paymentMethod, setPaymentMethod] = useState("credit_card");
-  const [addresses, setAddresses] = useState<Address[]>(initialAddresses);
-  const [selectedAddress, setSelectedAddress] = useState<number>(addresses[0]?.id || 0);
-  const [newAddress, setNewAddress] = useState<Omit<Address, "id">>({
-    name: "",
-    street: "",
-    city: "",
-    state: "",
-    zipCode: "",
-    country: "",
+  const billingData = useQuery<Address[]>({
+    queryKey: ["BILLING_ADDRESS"],
+    queryFn: getBillingAddress,
+    staleTime: Infinity,
+    refetchOnWindowFocus: false
   });
-  const [isAddressDialogOpen, setIsAddressDialogOpen] = useState(false);
+  const [billingAddressOpen, setBillingAddressOpen] = useState<boolean>(false);
+  const [selectedAddress, setSelectedAddress] = useState<string>('');
 
-  const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
-  const shippingCost = shippingMethod === "express" ? 15 : 5;
-  const total = subtotal + shippingCost;
+  useEffect(() => {
+    selectBillingAddress();
+  },[billingData.isSuccess, billingData.data])
 
-  const handleAddAddress = () => {
-    const id = addresses.length > 0 ? Math.max(...addresses.map((a) => a.id)) + 1 : 1;
-    const addedAddress = { id, ...newAddress };
-    setAddresses([...addresses, addedAddress]);
-    setSelectedAddress(id);
-    setNewAddress({
-      name: "",
-      street: "",
-      city: "",
-      state: "",
-      zipCode: "",
-      country: "",
-    });
-    setIsAddressDialogOpen(false);
-  };
-
-  const handleDeleteAddress = (id: number) => {
-    setAddresses(addresses.filter((address) => address.id !== id));
-    if (selectedAddress === id) {
-      setSelectedAddress(addresses.length > 1 ? addresses.find((a) => a.id !== id)?.id || 0 : 0);
+  const selectBillingAddress = ()=>{
+    if(billingData?.data?.length){
+      const defaultBillingAddress = billingData?.data?.filter((address) => address.default);
+      setSelectedAddress(defaultBillingAddress?.[0]?.id || selectedAddress || billingData?.data?.[0]?.id || '')
     }
-  };
+  }
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNewAddress({ ...newAddress, [e.target.name]: e.target.value });
+  const deleteBillingAddress = useDeleteBillingAddress();
+
+  const handleDeleteAddress = (id: string) => {
+    deleteBillingAddress.mutate(id,{
+      onSuccess(){
+        if(selectedAddress === id){
+          setSelectedAddress('');
+          selectBillingAddress();
+        }
+      }
+    })
   };
 
   const totalAmount = useMemo(() => {
@@ -137,6 +100,21 @@ export default function Component() {
     }, 0);
     return result;
   }, [data]);
+
+  const handleCheckout = useCheckoutMutation();
+
+  const checkout = () => {
+    if(!selectedAddress || !billingData?.data?.length){
+      toast.error("Please select a billing address.");
+      return;
+    }
+    const address = billingData.data.find((address) => address.id === selectedAddress);
+    if(!address){
+      toast.error("Please select a billing address.");
+      return;
+    }
+    handleCheckout.mutate(address);
+  }
 
   return (
     <div className="container mx-auto p-4">
@@ -150,9 +128,9 @@ export default function Component() {
                   <CardTitle>Billing Address</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <RadioGroup value={selectedAddress.toString()} onValueChange={(value) => setSelectedAddress(Number(value))}>
+                  <RadioGroup value={selectedAddress} onValueChange={(value) => {console.log(value);setSelectedAddress(value)}}>
                     <div className="grid gap-4">
-                      {addresses.map((address) => (
+                      {billingData?.data?.map((address:any) => (
                         <div key={address.id} className="relative">
                           <Label htmlFor={`address-${address.id}`} className="flex items-center space-x-3 border p-4 rounded-md cursor-pointer hover:bg-muted">
                             <RadioGroupItem value={address.id.toString()} id={`address-${address.id}`} />
@@ -182,7 +160,7 @@ export default function Component() {
                     </div>
                   </RadioGroup>
                   <div className="mt-4">
-                    <Button variant="outline" onClick={() => setOpen(!open)}>
+                    <Button variant="outline" onClick={() => setBillingAddressOpen(!billingAddressOpen)}>
                       <Plus className="mr-2 h-4 w-4" /> Add New Address
                     </Button>
                   </div>
@@ -225,10 +203,7 @@ export default function Component() {
                   <Button
                     className="w-full"
                     size="lg"
-                    onClick={() => {
-                      console.log("click");
-                      handleCheckout(Razorpay);
-                    }}
+                    onClick={checkout}
                   >
                     <CreditCard className="mr-2 h-4 w-4" /> Place Order
                   </Button>
@@ -236,7 +211,7 @@ export default function Component() {
               </Card>
             </div>
           </div>
-          <AddressDialog open={open} setOpen={setOpen} />
+          <AddressDialog open={billingAddressOpen} setOpen={setBillingAddressOpen} />
         </>
       ) : (
         <div className="flex justify-center items-center h-[20vh] text-5xl font-extrabold">No Items</div>

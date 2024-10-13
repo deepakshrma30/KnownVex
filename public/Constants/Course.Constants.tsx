@@ -538,7 +538,7 @@ export const COURSE_CONTANTS: any = {
       },
     ],
     highlights: ["Search Engine Optimization", "Content Marketing", "Social Media Marketing", "Email Marketing", "Pay-per-Click", "Analytics & Data Measurement", "Conversion Rate Optimization", "Affiliate & Influencer Marketing", "Mobile Marketing", "Digital Marketing", "Trends & Innovation", "Legal & Ethical Considerations"],
-    productName: "MARKETING",
+    productName: "DIGITAL_MARKETING",
   },
   finance: {
     words: [{ text: "Finance", className: "text-yellow-500" }],
@@ -581,7 +581,7 @@ export const COURSE_CONTANTS: any = {
       },
     ],
     highlights: ["Financial Statements", "Time Value of Money", "Investment Analysis", "Risk & Return", "Capital Budgeting", "Financial Strategy", "Financial Markets", "Corporate Finance", "Personal Finance", "Financial Ratios", "Valuation Methods", "Macroeconomics", "Behavioral Finance", "Ethics in Finance"],
-    productName: "MARKETING",
+    productName: "FINANCE",
   },
   hr: {
     words: [{ text: "Human Resources", className: "text-teal-500" }],
@@ -624,7 +624,7 @@ export const COURSE_CONTANTS: any = {
       },
     ],
     highlights: ["Recruitment and Selection", "Employee Onboarding", "Training and Development", "Performance Management", "Compensation & Benefits", "Labor Law", "Compliance", "Employee Relations", "Diversity", "Inclusion", "HR Metrics & Analytics", "Organization Development", "Succession Planning", "Workplace Health & Safety"],
-    productName: "MARKETING",
+    productName: "HUMAN_RESOURCE",
   },
   python: {
     words: [{ text: "Python", className: "text-rose-500" }],

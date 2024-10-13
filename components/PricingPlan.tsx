@@ -8,10 +8,11 @@ import {
   CardTitle,
 } from "./ui/card";
 import { Button } from "./ui/button";
-import { useCartStore } from "@/lib/store";
+import { useCartStore, useStore } from "@/lib/store";
 import { useShallow } from "zustand/react/shallow";
 import { useAddCart } from "@/services/mutation";
 import { addCartProps } from "@/types/types";
+import { useCounterStore } from "@/provider/counterProvider";
 
 function PricingPlanCard({
   title,
@@ -33,13 +34,19 @@ function PricingPlanCard({
   planName: string;
 }) {
   const apiAdd = useAddCart();
-  // const {addCart}=useCartStore(
-  //   useShallow((state)=>{
-  //     addCart:state.addCart
-  //   })
-  // )
+  const { handleLogin } = useCounterStore((state) => state);
+  const { active } = useStore(
+    useShallow((state) => ({
+      active: state.active,
+    }))
+  );
+
   const handleClick = (cartItem: addCartProps) => {
-    apiAdd.mutate(cartItem);
+    if(active){
+      apiAdd.mutate(cartItem);
+    }else{
+      handleLogin();
+    }
   };
   return (
     <Card className="w-full rounded-md ">

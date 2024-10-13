@@ -3,10 +3,10 @@ import { useRazorpay, RazorpayOrderOptions } from "react-razorpay";
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost/knowvex/",
+  baseURL: "http://3.91.144.249:9000/knowvex",
   headers: {
     "Content-Type": "application/json",
-      // "Accept":"application/json, text/plain"
+      "Accept":"application/json, text/plain"
   },
 });
 
@@ -67,10 +67,10 @@ export const login = async ({
 
 export const getCartItems = async () => {
   const response = await axiosInstance.get("/cart/all",{
-    // headers: {
-    //   "Auth-token":
-    //     "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiJiZDRlZTQyMy0yYmRlLTRlMjYtOGNlNi0xYjU0NjczMWFmNTciLCJzdWIiOiJhZG1pbjEyM0B5b3BtYWlsLmNvbSIsImlhdCI6MTcyODQxNTIyMiwiZXhwIjoxNzI4NDUxMjIyfQ.MpMyiF6C2M3Z-7M2sraO_S0pWY1gi8-CVErfi8TsYz0",
-    // },
+    headers: {
+      "Auth-token":
+        "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiJiZDRlZTQyMy0yYmRlLTRlMjYtOGNlNi0xYjU0NjczMWFmNTciLCJzdWIiOiJhZG1pbjEyM0B5b3BtYWlsLmNvbSIsImlhdCI6MTcyODQxNTIyMiwiZXhwIjoxNzI4NDUxMjIyfQ.MpMyiF6C2M3Z-7M2sraO_S0pWY1gi8-CVErfi8TsYz0",
+    },
   });
   return response?.data;
 };
@@ -113,14 +113,14 @@ export const handleCheckout = async (Razorpay:any) => {
 
     const { orderId, totalAmount } = data;
     // Step 2: Configure Razorpay options
-    const options: RazorpayOrderOptions = {
+    const options: any = {
       key: "rzp_test_yP2ME4oC1YeSUg",
       amount: totalAmount,
       currency: "INR",
       name: "Test Company",
       description: "Test Transaction",
       order_id: orderId, 
-      handler: async (response) => {
+      handler: async (response:any) => {
         console.log(response);
         await updateOrderStatus(orderId, 'COMPLETED', response.razorpay_payment_id);
         alert("Payment Successful!");

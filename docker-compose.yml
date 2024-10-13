@@ -7,7 +7,11 @@ services:
     ports:
       - "3000:3000"  # Next.js will run on port 3000
     environment:
-      - NODE_ENV=production
+      - NODE_ENV=development  # Set environment to development for hot-reloading
+    volumes:
+      - .:/app  # Mount the current directory to the /app directory inside the container
+      - /app/node_modules  # Ensure node_modules is not overridden
+    command: "npm run dev"  # Run the Next.js development server
     networks:
       - webnet
 

@@ -178,6 +178,7 @@ const AppBar = () => {
               <Link
                 href={item.href || "#"}
                 className={`block py-2 px-4 text-sm hover:bg-accent rounded-md ${item.className}`}
+                onClick={()=>setIsOpen(!isOpen)}
               >
                 {item.label}
               </Link>
